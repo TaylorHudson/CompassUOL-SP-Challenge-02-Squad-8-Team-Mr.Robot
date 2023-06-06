@@ -5,6 +5,9 @@ import br.com.compassuol.sp.challenge.ecommerce.entity.Customer;
 import br.com.compassuol.sp.challenge.ecommerce.service.CustomerService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -13,43 +16,28 @@ import java.util.Optional;
 @RequestMapping("/v1")
 public class CustomerRestController {
 
-    @Autowired
-    private CustomerService customerService;
+    private final CustomerService customerService;
 
     public CustomerRestController(CustomerService customerService) {
         this.customerService = customerService;
     }
 
     @GetMapping("/customers/{id}")
-    public Customer findCustomerById(@Valid @PathVariable int id){
-
-        Optional<Customer> result = customerService.findCustomerById(id);
-
-        Customer theCustomer = null;
-
-        if(result.isPresent()){
-            theCustomer = result.get();
-        }
-        else {
-            throw new RuntimeException("Did not find employee id-"+id);
-        }
-        return theCustomer;
+    public ResponseEntity<Customer> findCustomerById(@PathVariable int id){
+        Customer customer = customerService.findCustomerById(id);
+        return ResponseEntity.status(HttpStatus.OK).body(customer);
     }
 
     @PostMapping("/customers")
-    public Customer createCustomer(@RequestBody Customer customer){
-
-        Customer dbCustomer = customerService.createCustomer(customer);
-
-        return dbCustomer;
+    public ResponseEntity<Customer> createCustomer(@Valid @RequestBody Customer customer) {
+        Customer createdCustomer = customerService.createCustomer(customer);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdCustomer);
     }
 
     @PutMapping("/customers/{id}")
-    public Optional<Customer> updateCustomer(@PathVariable int id, @RequestBody Customer customer){
-
-        Optional<Customer> customerUpdated = customerService.updateCustomer(id,customer);
-
-        return  customerUpdated;
-
+    public ResponseEntity<Customer> updateCustomer(@PathVariable int id, @Valid @RequestBody Customer customer){
+        Customer updatedCustomer = customerService.updateCustomer(id, customer);
+        return ResponseEntity.status(HttpStatus.OK).body(updatedCustomer);
     }
+
 }

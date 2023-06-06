@@ -2,11 +2,10 @@ package br.com.compassuol.sp.challenge.ecommerce.service;
 
 
 import br.com.compassuol.sp.challenge.ecommerce.entity.Customer;
+import br.com.compassuol.sp.challenge.ecommerce.exceptions.ResourceNotFoundException;
 import br.com.compassuol.sp.challenge.ecommerce.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class CustomerService {
@@ -18,31 +17,23 @@ public class CustomerService {
         this.customerRepository = customerRepository;
     }
 
-
-    public Optional<Customer> findCustomerById(int id) {
-
-        Optional<Customer> theCustomer = customerRepository.findById(id);
-
-        return theCustomer;
+    public Customer findCustomerById(int id) {
+        return customerRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Did not find customer with id - " + id));
     }
 
     public Customer createCustomer(Customer customer) {
-
-        Customer theCustomer = customerRepository.save(customer);
-
-        return theCustomer;
+        Customer createdCustomer = customerRepository.save(customer);
+        createdCustomer.setActive(true);
+        return createdCustomer;
     }
 
-    public Optional<Customer> updateCustomer(int id, Customer customer) {
+    public Customer updateCustomer(int id, Customer customer) {
+        customerRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("The id supplied must be from a customer that is already created"));
 
-        Optional<Customer> customerToUpdate = findCustomerById(id);
-
-        if (customerToUpdate.isPresent()) {
-            customer.setCustomerId(id);
-            Customer updatedCostumer = customerRepository.save(customer);
-            customerToUpdate = Optional.of(updatedCostumer);
-        }
-
-        return customerToUpdate;
+        customer.setCustomerId(id);
+        return customerRepository.save(customer);
     }
+
 }

@@ -30,10 +30,15 @@ public class CustomerService {
         return mapper.map(customer, CustomerResponseDTO.class);
     }
 
-    public Customer createCustomer(Customer customer) {
-        Customer createdCustomer = customerRepository.save(customer);
+    public CustomerResponseDTO createCustomer(CustomerRequestDTO customer) {
+
+        Customer createdCustomer = mapper.map(customer,Customer.class);
+
+        createdCustomer = customerRepository.save(createdCustomer);
+
         createdCustomer.setActive(true);
-        return createdCustomer;
+
+        return mapper.map(createdCustomer,CustomerResponseDTO.class);
     }
 
     public CustomerResponseDTO updateCustomer(int id, CustomerRequestDTO request) {

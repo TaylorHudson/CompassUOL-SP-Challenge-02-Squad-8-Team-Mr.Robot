@@ -1,6 +1,8 @@
 package br.com.compassuol.sp.challenge.ecommerce.controllers;
 
 
+import br.com.compassuol.sp.challenge.ecommerce.dto.request.CustomerRequestDTO;
+import br.com.compassuol.sp.challenge.ecommerce.dto.response.CustomerResponseDTO;
 import br.com.compassuol.sp.challenge.ecommerce.entity.Customer;
 import br.com.compassuol.sp.challenge.ecommerce.service.CustomerService;
 import jakarta.validation.Valid;
@@ -23,9 +25,9 @@ public class CustomerRestController {
     }
 
     @GetMapping("/customers/{id}")
-    public ResponseEntity<Customer> findCustomerById(@PathVariable int id){
-        Customer customer = customerService.findCustomerById(id);
-        return ResponseEntity.status(HttpStatus.OK).body(customer);
+    public ResponseEntity<CustomerResponseDTO> findCustomerById(@PathVariable int id){
+        var customerDTO = customerService.findCustomerById(id);
+        return ResponseEntity.status(HttpStatus.OK).body(customerDTO);
     }
 
     @PostMapping("/customers")
@@ -35,8 +37,10 @@ public class CustomerRestController {
     }
 
     @PutMapping("/customers/{id}")
-    public ResponseEntity<Customer> updateCustomer(@PathVariable int id, @Valid @RequestBody Customer customer){
-        Customer updatedCustomer = customerService.updateCustomer(id, customer);
+    public ResponseEntity<CustomerResponseDTO> updateCustomer(
+            @PathVariable int id,
+            @Valid @RequestBody CustomerRequestDTO customer){
+        var updatedCustomer = customerService.updateCustomer(id, customer);
         return ResponseEntity.status(HttpStatus.OK).body(updatedCustomer);
     }
 

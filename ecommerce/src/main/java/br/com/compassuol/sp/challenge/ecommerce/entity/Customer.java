@@ -21,7 +21,7 @@ public class Customer {
     @Size(min = 3)
     private String name;
 
-    @Size(min = 14, max = 14) //modificar validation
+    @Size(min = 11, max = 14)
     private String cpf;
 
     @Email

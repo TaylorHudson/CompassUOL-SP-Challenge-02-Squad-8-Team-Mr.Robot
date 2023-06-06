@@ -12,13 +12,13 @@ import lombok.Setter;
 @NoArgsConstructor
 public class CustomerRequestDTO {
 
-    @Size(min = 3)
+    @Size(min = 3,message = "The name must be at least 3 characters long")
     private String name;
 
-    @Size(min = 11, max = 14)
+    @Size(min = 11, max = 14,message = "The cpf ins't in the correct size")
     private String cpf;
 
-    @Email
+    @Email(message = "The email must be a well-formed email address")
     private String email;
 
 }

@@ -1,6 +1,6 @@
 create database challenge2;
 
-use challenge2
+use challenge2;
 
 create table if not exists Customer (
 customer_id int auto_increment primary KEY,

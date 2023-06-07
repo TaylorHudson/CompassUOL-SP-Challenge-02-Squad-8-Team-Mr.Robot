@@ -4,13 +4,13 @@ import br.com.compassuol.sp.challenge.ecommerce.dto.request.CustomerRequestDTO;
 import br.com.compassuol.sp.challenge.ecommerce.dto.response.CustomerResponseDTO;
 import br.com.compassuol.sp.challenge.ecommerce.entity.Customer;
 import br.com.compassuol.sp.challenge.ecommerce.exceptions.InvalidCpfOrEmailException;
+import br.com.compassuol.sp.challenge.ecommerce.exceptions.ResourceNotFoundException;
 import br.com.compassuol.sp.challenge.ecommerce.repository.CustomerRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.mockito.stubbing.OngoingStubbing;
 import org.modelmapper.ModelMapper;
 
 import java.util.Optional;
@@ -40,7 +40,7 @@ class CustomerServiceTest {
 
         CustomerResponseDTO expectedResponse = new CustomerResponseDTO(1,"John Doe", "12345678910", "john.doe@gmail.com");
 
-       when(repository.findById(any())).thenReturn(Optional.ofNullable(customer));
+       when(repository.findById(any())).thenReturn(Optional.of(customer));
        when(mapper.map(customer, CustomerResponseDTO.class)).thenReturn(expectedResponse);
 
        CustomerResponseDTO response = service.findCustomerById(1);
@@ -50,6 +50,18 @@ class CustomerServiceTest {
        verify(mapper).map(customer,CustomerResponseDTO.class);
        verify(repository).findById(1);
     }
+
+
+    @Test
+    void findCustomerByIdErrorResourceNotFound() {
+
+        when(repository.findById(1)).thenReturn(Optional.empty());
+
+        assertThrows(ResourceNotFoundException.class, () -> service.findCustomerById(1));
+        verify(repository).findById(1);
+    }
+
+
 
     @Test
     void createCustomerSuccess() {
@@ -91,7 +103,7 @@ class CustomerServiceTest {
         assertThrows(InvalidCpfOrEmailException.class, () -> service.createCustomer(customerRequest));
         verify(repository, times(0)).save(any(Customer.class));
     }
-    
+
     @Test
     void updateCustomer() {
     }

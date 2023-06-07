@@ -22,6 +22,7 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class CustomerServiceTest {
+
     @Mock
     private CustomerRepository repository;
 
@@ -31,14 +32,22 @@ class CustomerServiceTest {
     @InjectMocks
     private CustomerService service;
 
+    private Customer createCustomerDefault() {
+        Customer customer = new Customer("John Doe", "12345678910", "john.doe@gmail.com", true);
+        customer.setCustomerId(1);
+        return customer;
+    }
+
+    private CustomerResponseDTO createExpectedResponseDefault() {
+        return new CustomerResponseDTO(1,"John Doe", "12345678910", "john.doe@gmail.com");
+    }
+
     @Test
     void findCustomerByIdSuccess() {
 
-        Customer customer =
-                new Customer("John Doe", "12345678910", "john.doe@gmail.com", true);
-        customer.setCustomerId(1);
+        Customer customer = createCustomerDefault();
 
-        CustomerResponseDTO expectedResponse = new CustomerResponseDTO(1,"John Doe", "12345678910", "john.doe@gmail.com");
+        CustomerResponseDTO expectedResponse = createExpectedResponseDefault();
 
        when(repository.findById(any())).thenReturn(Optional.of(customer));
 
@@ -52,7 +61,6 @@ class CustomerServiceTest {
        verify(repository).findById(1);
     }
 
-
     @Test
     void findCustomerByIdErrorResourceNotFound() {
 
@@ -62,23 +70,15 @@ class CustomerServiceTest {
         verify(repository).findById(1);
     }
 
-
-
     @Test
     void createCustomerSuccess() {
         CustomerRequestDTO customerRequest = new CustomerRequestDTO();
-
-        Customer customer =
-                new Customer("John Doe", "12345678910", "john.doe@gmail.com", true);
-        customer.setCustomerId(1);
+        Customer customer = createCustomerDefault();
 
         when(repository.save(any(Customer.class))).thenReturn(customer);
 
-        CustomerResponseDTO expectedResponse =
-                new CustomerResponseDTO(1,"John Doe", "12345678910", "john.doe@gmail.com");
-
+        CustomerResponseDTO expectedResponse = createExpectedResponseDefault();
         CustomerResponseDTO response = service.createCustomer(customerRequest);
-
 
         assertAll("response",
                 () -> assertEquals(expectedResponse.getCpf(), response.getCpf()),
@@ -86,7 +86,6 @@ class CustomerServiceTest {
                 () -> assertTrue(customer.isActive()),
                 () -> assertEquals(1, response.getCustomerId())
         );
-
         verify(repository).save(any(Customer.class));
     }
 
@@ -94,9 +93,7 @@ class CustomerServiceTest {
     void createCustomerInvalidCpfOrEmailException() {
         CustomerRequestDTO customerRequest = new CustomerRequestDTO();
 
-        Customer customer =
-                new Customer("John Doe", "12345678910", "john.doe@gmail.com", true);
-        customer.setCustomerId(1);
+        Customer customer = createCustomerDefault();
 
         when(repository.findByCpfOrEmail(any(), any())).thenReturn(Optional.of(customer));
 
@@ -105,6 +102,34 @@ class CustomerServiceTest {
     }
 
     @Test
-    void updateCustomer() {
+    void updateCustomerSuccess() {
+        CustomerRequestDTO customerRequest =
+                new CustomerRequestDTO("John Doe","12345678910","john.doe@gmail.com");
+
+        Customer customer = createCustomerDefault();
+
+        CustomerResponseDTO expectedResponse = createExpectedResponseDefault();
+
+        when(repository.findById(anyInt())).thenReturn(Optional.of(customer));
+        when(repository.save(any(Customer.class))).thenReturn(customer);
+
+        CustomerResponseDTO response = service.updateCustomer(1, customerRequest);
+
+        assertAll("response",
+                () -> assertEquals(expectedResponse.getCpf(), response.getCpf()),
+                () -> assertEquals(expectedResponse.getEmail(), response.getEmail()),
+                () -> assertEquals(1, response.getCustomerId())
+        );
+        verify(repository).findById(anyInt());
+        verify(repository).save(any(Customer.class));
     }
+
+    @Test
+    void updateCustomerErrorResourceNotFound() {
+        when(repository.findById(anyInt())).thenReturn(Optional.empty());
+
+        assertThrows(ResourceNotFoundException.class, () -> service.findCustomerById(1));
+        verify(repository).findById(1);
+    }
+
 }

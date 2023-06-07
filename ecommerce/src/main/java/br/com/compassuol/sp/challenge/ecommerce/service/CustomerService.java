@@ -4,11 +4,14 @@ package br.com.compassuol.sp.challenge.ecommerce.service;
 import br.com.compassuol.sp.challenge.ecommerce.dto.request.CustomerRequestDTO;
 import br.com.compassuol.sp.challenge.ecommerce.dto.response.CustomerResponseDTO;
 import br.com.compassuol.sp.challenge.ecommerce.entity.Customer;
+import br.com.compassuol.sp.challenge.ecommerce.exceptions.InvalidCpfOrEmailException;
 import br.com.compassuol.sp.challenge.ecommerce.exceptions.ResourceNotFoundException;
 import br.com.compassuol.sp.challenge.ecommerce.repository.CustomerRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class CustomerService {
@@ -31,6 +34,12 @@ public class CustomerService {
     }
 
     public CustomerResponseDTO createCustomer(CustomerRequestDTO customer) {
+
+        Optional<Customer> found = customerRepository.findByCpfOrEmail(customer.getCpf(), customer.getEmail());
+
+        if (found.isPresent()) {
+            throw new InvalidCpfOrEmailException("Cpf - "+customer.getCpf()+" or Email - "+customer.getEmail()+" is already registered");
+        }
 
         Customer createdCustomer = mapper.map(customer,Customer.class);
 

@@ -32,7 +32,7 @@ class CustomerServiceTest {
     private CustomerService service;
 
     @Test
-    void findCustomerById() {
+    void findCustomerByIdSuccess() {
 
         Customer customer =
                 new Customer("John Doe", "12345678910", "john.doe@gmail.com", true);
@@ -91,10 +91,7 @@ class CustomerServiceTest {
         assertThrows(InvalidCpfOrEmailException.class, () -> service.createCustomer(customerRequest));
         verify(repository, times(0)).save(any(Customer.class));
     }
-    @Test
-    void findCustomerByIdSuccess(){
-
-    }
+    
     @Test
     void updateCustomer() {
     }

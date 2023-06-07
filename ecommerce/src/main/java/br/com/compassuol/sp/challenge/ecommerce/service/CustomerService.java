@@ -1,14 +1,15 @@
 package br.com.compassuol.sp.challenge.ecommerce.service;
 
 
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import br.com.compassuol.sp.challenge.ecommerce.dto.request.CustomerRequestDTO;
 import br.com.compassuol.sp.challenge.ecommerce.dto.response.CustomerResponseDTO;
 import br.com.compassuol.sp.challenge.ecommerce.entity.Customer;
 import br.com.compassuol.sp.challenge.ecommerce.exceptions.ResourceNotFoundException;
 import br.com.compassuol.sp.challenge.ecommerce.repository.CustomerRepository;
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 @Service
 public class CustomerService {

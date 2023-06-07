@@ -13,6 +13,13 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class GlobalErrorHandler {
 
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ErrorMessage> handleGenericException(Exception ex) {
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        ErrorMessage error = createErrorResponse(status, ex);
+        return ResponseEntity.status(status).body(error);
+    }
+
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<ErrorMessage> handleResourceNotFoundException(ResourceNotFoundException ex) {
         HttpStatus status = HttpStatus.NOT_FOUND;
@@ -20,12 +27,10 @@ public class GlobalErrorHandler {
         return ResponseEntity.status(status).body(error);
     }
 
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<ErrorMessage> handleGenericException(Exception ex) {
+    @ExceptionHandler(InvalidCpfOrEmailException.class)
+    public ResponseEntity<ErrorMessage> handleInvalidCpfOrEmailException(InvalidCpfOrEmailException ex) {
         HttpStatus status = HttpStatus.BAD_REQUEST;
-
         ErrorMessage error = createErrorResponse(status, ex);
-
         return ResponseEntity.status(status).body(error);
     }
 

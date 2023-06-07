@@ -11,6 +11,7 @@ import br.com.compassuol.sp.challenge.ecommerce.dto.request.ProductRequestDTO;
 import br.com.compassuol.sp.challenge.ecommerce.dto.response.ProductResponseDTO;
 import br.com.compassuol.sp.challenge.ecommerce.dto.response.ProductResponseDTO;
 import br.com.compassuol.sp.challenge.ecommerce.entity.Product;
+import br.com.compassuol.sp.challenge.ecommerce.exceptions.ProductPriceNotValidException;
 import br.com.compassuol.sp.challenge.ecommerce.exceptions.ResourceNotFoundException;
 import br.com.compassuol.sp.challenge.ecommerce.repository.ProductRepository;
 
@@ -38,6 +39,10 @@ public class ProductService {
 
 		Product createdProduct = mapper.map(product, Product.class);
 
+		if(createdProduct.getPrice() == 0 || createdProduct.getPrice() < 0) {
+			throw new ProductPriceNotValidException("Product price not valid");
+		}
+		
 		createdProduct = productRepository.save(createdProduct);
 
 		return mapper.map(createdProduct, ProductRequestDTO.class);

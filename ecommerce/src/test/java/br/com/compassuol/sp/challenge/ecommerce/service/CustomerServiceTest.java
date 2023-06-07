@@ -10,6 +10,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.stubbing.OngoingStubbing;
 import org.modelmapper.ModelMapper;
 
 import java.util.Optional;
@@ -32,6 +33,22 @@ class CustomerServiceTest {
 
     @Test
     void findCustomerById() {
+
+        Customer customer =
+                new Customer("John Doe", "12345678910", "john.doe@gmail.com", true);
+        customer.setCustomerId(1);
+
+        CustomerResponseDTO expectedResponse = new CustomerResponseDTO(1,"John Doe", "12345678910", "john.doe@gmail.com");
+
+       when(repository.findById(any())).thenReturn(Optional.ofNullable(customer));
+       when(mapper.map(customer, CustomerResponseDTO.class)).thenReturn(expectedResponse);
+
+       CustomerResponseDTO response = service.findCustomerById(1);
+
+       assertEquals(expectedResponse,response);
+       assertEquals(1,response.getCustomerId());
+       verify(mapper).map(customer,CustomerResponseDTO.class);
+       verify(repository).findById(1);
     }
 
     @Test
@@ -74,7 +91,10 @@ class CustomerServiceTest {
         assertThrows(InvalidCpfOrEmailException.class, () -> service.createCustomer(customerRequest));
         verify(repository, times(0)).save(any(Customer.class));
     }
+    @Test
+    void findCustomerByIdSuccess(){
 
+    }
     @Test
     void updateCustomer() {
     }

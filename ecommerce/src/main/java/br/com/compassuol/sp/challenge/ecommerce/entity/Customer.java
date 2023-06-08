@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.validator.constraints.UniqueElements;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -23,13 +25,13 @@ public class Customer {
     private String name;
 
     @Size(min = 11, max = 14,message = "The cpf ins't in the correct size")
-
     private String cpf;
 
     @Email(message = "The email must be a well-formed email address")
     private String email;
 
     private boolean active;
+
 
     public Customer(String name, String cpf, String email, boolean active) {
         this.name = name;

@@ -1,3 +1,4 @@
+use challenge2;
 
 create table if not exists Product(
 

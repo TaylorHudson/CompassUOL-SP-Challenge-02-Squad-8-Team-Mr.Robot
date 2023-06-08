@@ -4,8 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="141d762e-9bea-4007-92fe-2c17e33e9e43" name="Changes" comment="">
+    <list default="true" id="141d762e-9bea-4007-92fe-2c17e33e9e43" name="Changes" comment="fix: changed RequestDTO for ResponseDTO">
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecommerce/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecommerce/src/main/java/br/com/compassuol/sp/challenge/ecommerce/dto/request/ProductRequestDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce/src/main/java/br/com/compassuol/sp/challenge/ecommerce/dto/request/ProductRequestDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecommerce/src/main/java/br/com/compassuol/sp/challenge/ecommerce/dto/response/ProductResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce/src/main/java/br/com/compassuol/sp/challenge/ecommerce/dto/response/ProductResponseDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecommerce/src/main/java/br/com/compassuol/sp/challenge/ecommerce/entity/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce/src/main/java/br/com/compassuol/sp/challenge/ecommerce/entity/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecommerce/src/main/resources/DBScripts/productTable.sql" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce/src/main/resources/DBScripts/productTable.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecommerce/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecommerce/src/test/java/br/com/compassuol/sp/challenge/ecommerce/ProductServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce/src/test/java/br/com/compassuol/sp/challenge/ecommerce/ProductServiceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,21 +74,27 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_directory_selection&quot;: &quot;C:/Users/Vitor/OneDrive/Área de Trabalho/challenge2/ecommerce/src/test/java&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/Vitor/OneDrive/Área de Trabalho/challenge2&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
     &quot;spring.configuration.checksum&quot;: &quot;db96ff26706a1a3d595ecb67266c2d94&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
+    ]
   }
 }</component>
-  <component name="RunManager" selected="JUnit.ProductServiceTest.testFindProductById_Success">
-    <configuration name="ProductServiceTest.testCreateProduct_Success" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.ProductServiceTest.findProductByIdSuccess">
+    <configuration name="ProductServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ecommerce" />
       <extension name="coverage">
         <pattern>
@@ -90,7 +104,38 @@
       </extension>
       <option name="PACKAGE_NAME" value="br.com.compassuol.sp.challenge.ecommerce" />
       <option name="MAIN_CLASS_NAME" value="br.com.compassuol.sp.challenge.ecommerce.ProductServiceTest" />
-      <option name="METHOD_NAME" value="testCreateProduct_Success" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ProductServiceTest.findProductByIdErrorResourceNotFound" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ecommerce" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="br.com.compassuol.sp.challenge.ecommerce.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="br.com.compassuol.sp.challenge.ecommerce" />
+      <option name="MAIN_CLASS_NAME" value="br.com.compassuol.sp.challenge.ecommerce.ProductServiceTest" />
+      <option name="METHOD_NAME" value="findProductByIdErrorResourceNotFound" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ProductServiceTest.findProductByIdSuccess" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ecommerce" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="br.com.compassuol.sp.challenge.ecommerce.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="br.com.compassuol.sp.challenge.ecommerce" />
+      <option name="MAIN_CLASS_NAME" value="br.com.compassuol.sp.challenge.ecommerce.ProductServiceTest" />
+      <option name="METHOD_NAME" value="findProductByIdSuccess" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -137,9 +182,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.ProductServiceTest.testFindProductById_Success" />
-        <item itemvalue="JUnit.ProductServiceTest.testCreateProduct_Success" />
+        <item itemvalue="JUnit.ProductServiceTest.findProductByIdSuccess" />
         <item itemvalue="JUnit.ProductServiceTest.testDeleteProduct" />
+        <item itemvalue="JUnit.ProductServiceTest.findProductByIdErrorResourceNotFound" />
+        <item itemvalue="JUnit.ProductServiceTest" />
+        <item itemvalue="JUnit.ProductServiceTest.testFindProductById_Success" />
       </list>
     </recent_temporary>
   </component>
@@ -153,8 +200,17 @@
       <updated>1686169113540</updated>
       <workItem from="1686169117889" duration="5477000" />
       <workItem from="1686185582146" duration="2335000" />
-      <workItem from="1686231781241" duration="1985000" />
+      <workItem from="1686231781241" duration="16123000" />
+      <workItem from="1686249298938" duration="736000" />
     </task>
+    <task id="LOCAL-00001" summary="fix: changed RequestDTO for ResponseDTO">
+      <created>1686248965093</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1686248965093</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -170,5 +226,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="fix: changed RequestDTO for ResponseDTO" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: changed RequestDTO for ResponseDTO" />
   </component>
 </project>

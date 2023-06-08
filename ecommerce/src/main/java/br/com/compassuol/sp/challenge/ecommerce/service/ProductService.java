@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import br.com.compassuol.sp.challenge.ecommerce.dto.request.ProductRequestDTO;
 import br.com.compassuol.sp.challenge.ecommerce.dto.response.ProductResponseDTO;
-import br.com.compassuol.sp.challenge.ecommerce.dto.response.ProductResponseDTO;
 import br.com.compassuol.sp.challenge.ecommerce.entity.Product;
 import br.com.compassuol.sp.challenge.ecommerce.exceptions.ProductPriceNotValidException;
 import br.com.compassuol.sp.challenge.ecommerce.exceptions.ResourceNotFoundException;
@@ -59,5 +58,24 @@ public class ProductService {
 	    	
 	    	return productsListDTO;
 	    }
+	public ProductResponseDTO updateProduct(int id, ProductRequestDTO request) {
+		Product product = productRepository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("The id supplied must be from a product that is already created"));
+
+		product.setName(request.getName());
+		product.setPrice(request.getPrice());
+
+		Product updatedProduct = productRepository.save(product);
+		return mapper.map(updatedProduct, ProductResponseDTO.class);
+	}
+
+	public void deleteProduct(int id) {
+		Product product = productRepository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("The product corresponding to this ID does not exist"));
+
+		productRepository.delete(product);
+	}
+
+
 
 }

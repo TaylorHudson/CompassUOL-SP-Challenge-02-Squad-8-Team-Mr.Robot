@@ -1,6 +1,7 @@
 package br.com.compassuol.sp.challenge.ecommerce.dto.request;
 
 
+import br.com.compassuol.sp.challenge.ecommerce.dto.response.ProductResponseDTO;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,6 +12,8 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProductRequestDTO {
+
+    private int productId;
 	
 	@Size(min = 5,message = "The description must be at least 3 characters long")
     private String description;

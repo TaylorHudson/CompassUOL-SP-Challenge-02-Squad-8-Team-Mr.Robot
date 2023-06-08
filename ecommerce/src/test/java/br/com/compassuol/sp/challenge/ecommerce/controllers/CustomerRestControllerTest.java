@@ -18,8 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.anyInt;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
 @WebMvcTest(controllers = CustomerRestController.class)
 class CustomerRestControllerTest {
@@ -118,6 +117,42 @@ class CustomerRestControllerTest {
     }
 
     @Test
-    void updateCustomer() {
+    void updateCustomerSuccess() throws Exception {
+        var request = new CustomerRequestDTO("john doe","12345678910","john.doe@email.com");
+        var responseDTO = new CustomerResponseDTO(1,"john Doeing", "12345678910", "john.doe@email.com");
+
+        when(customerService.updateCustomer(anyInt(),any(CustomerRequestDTO.class))).thenReturn(responseDTO);
+
+        String requestBody = Utils.mapToString(request);
+
+        var result =
+                mockMvc.perform(put(ID_URL)
+                                .accept(MediaType.APPLICATION_JSON)
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(requestBody))
+                                .andReturn();
+
+        var response = result.getResponse();
+
+        assertEquals(HttpStatus.OK.value(), response.getStatus());
+    }
+
+    @Test
+    void updateCustomerResourceNotFoundException() throws Exception {
+        var request = new CustomerRequestDTO("john doe","12345678910","john.doe@email.com");
+
+        when(customerService.updateCustomer(anyInt(),any(CustomerRequestDTO.class))).thenThrow(new ResourceNotFoundException(""));
+
+        String requestBody = Utils.mapToString(request);
+
+        var result =
+                mockMvc.perform(put(ID_URL)
+                                .accept(MediaType.APPLICATION_JSON)
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(requestBody))
+                        .andReturn();
+        var response = result.getResponse();
+
+        assertEquals(HttpStatus.NOT_FOUND.value(), response.getStatus());
     }
 }

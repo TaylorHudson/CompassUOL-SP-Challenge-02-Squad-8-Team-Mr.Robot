@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 
 import br.com.compassuol.sp.challenge.ecommerce.dto.request.ProductRequestDTO;
 import br.com.compassuol.sp.challenge.ecommerce.dto.response.ProductResponseDTO;
-import br.com.compassuol.sp.challenge.ecommerce.dto.response.ProductResponseDTO;
 import br.com.compassuol.sp.challenge.ecommerce.entity.Product;
+import br.com.compassuol.sp.challenge.ecommerce.exceptions.ProductPriceNotValidException;
 import br.com.compassuol.sp.challenge.ecommerce.exceptions.ResourceNotFoundException;
 import br.com.compassuol.sp.challenge.ecommerce.repository.ProductRepository;
 
@@ -27,20 +27,24 @@ public class ProductService {
 		this.mapper = mapper;
 	}
 
-	public ProductRequestDTO findProductById(int id) {
+	public ProductResponseDTO findProductById(int id) {
 		Product customer = productRepository.findById(id)
-				.orElseThrow(() -> new ResourceNotFoundException("Did not find customer with id - " + id));
+				.orElseThrow(() -> new ResourceNotFoundException("Did not find product with id - " + id));
 
-		return mapper.map(customer, ProductRequestDTO.class);
+		return mapper.map(customer, ProductResponseDTO.class);
 	}
 
-	public ProductRequestDTO createProduct(ProductRequestDTO product) {
+	public ProductResponseDTO createProduct(ProductRequestDTO product) {
 
 		Product createdProduct = mapper.map(product, Product.class);
 
+		if(createdProduct.getPrice() == 0 || createdProduct.getPrice() < 0) {
+			throw new ProductPriceNotValidException("Product price not valid");
+		}
+		
 		createdProduct = productRepository.save(createdProduct);
 
-		return mapper.map(createdProduct, ProductRequestDTO.class);
+		return mapper.map(createdProduct, ProductResponseDTO.class);
 	}
 
 	public List<ProductResponseDTO> findAllProducts(){
@@ -54,5 +58,24 @@ public class ProductService {
 	    	
 	    	return productsListDTO;
 	    }
+	public ProductResponseDTO updateProduct(int id, ProductRequestDTO request) {
+		Product product = productRepository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("The id supplied must be from a product that is already created"));
+
+		product.setName(request.getName());
+		product.setPrice(request.getPrice());
+
+		Product updatedProduct = productRepository.save(product);
+		return mapper.map(updatedProduct, ProductResponseDTO.class);
+	}
+
+	public void deleteProduct(int id) {
+		Product product = productRepository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("The product corresponding to this ID does not exist"));
+
+		productRepository.delete(product);
+	}
+
+
 
 }

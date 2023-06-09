@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class GlobalErrorHandler {
 
-    @ExceptionHandler(Exception.class)
+    private static final Class<? extends Throwable>[] ProductPriceNotValidException = null;
+
+	@ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorMessage> handleGenericException(Exception ex) {
         HttpStatus status = HttpStatus.BAD_REQUEST;
         ErrorMessage error = createErrorResponse(status, ex);
@@ -34,6 +36,13 @@ public class GlobalErrorHandler {
         return ResponseEntity.status(status).body(error);
     }
 
+    @ExceptionHandler(ProductPriceNotValidException.class)
+    public ResponseEntity<ErrorMessage> handleProductPriceNotValidException(ProductPriceNotValidException ex){
+    	HttpStatus status = HttpStatus.NOT_ACCEPTABLE;
+        ErrorMessage error = createErrorResponse(status, ex);
+        return ResponseEntity.status(status).body(error);
+    }
+    
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<List<ErrorMessage>> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
         HttpStatus status = HttpStatus.BAD_REQUEST;

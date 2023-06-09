@@ -1,13 +1,15 @@
 package br.com.compassuol.sp.challenge.ecommerce.entity;
+import br.com.compassuol.sp.challenge.ecommerce.dto.request.OrderRequestDTO;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Past;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.aspectj.weaver.ast.Or;
+
 import java.util.Date;
 import java.util.List;
 @Getter
 @Setter
+@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "orders")
@@ -29,5 +31,7 @@ public class Order {
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<ProductQuantity> products;
+
+
 
 }

@@ -1,6 +1,6 @@
 package br.com.compassuol.sp.challenge.ecommerce.controllers;
 
-import br.com.compassuol.sp.challenge.ecommerce.Utils;
+import br.com.compassuol.sp.challenge.ecommerce.utils.Utils;
 import br.com.compassuol.sp.challenge.ecommerce.dto.request.ProductRequestDTO;
 import br.com.compassuol.sp.challenge.ecommerce.dto.response.ProductResponseDTO;
 import br.com.compassuol.sp.challenge.ecommerce.exceptions.ResourceNotFoundException;

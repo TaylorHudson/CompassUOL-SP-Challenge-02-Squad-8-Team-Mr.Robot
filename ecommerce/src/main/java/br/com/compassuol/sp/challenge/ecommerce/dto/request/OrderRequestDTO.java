@@ -17,7 +17,6 @@ public class OrderRequestDTO {
 
         private int customerId;
 
-//        private List<ProductDTO> products;
         private List<ProductQuantityRequestDTO> products;
 
         private Date date;

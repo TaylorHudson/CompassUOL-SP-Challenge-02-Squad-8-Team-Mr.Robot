@@ -6,10 +6,6 @@ import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.validator.constraints.UniqueElements;
-
-import java.util.List;
-
 @Getter
 @Setter
 @NoArgsConstructor
@@ -31,7 +27,6 @@ public class Customer {
     private String email;
 
     private boolean active;
-
 
     public Customer(String name, String cpf, String email, boolean active) {
         this.name = name;

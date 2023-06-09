@@ -1,20 +1,14 @@
 package br.com.compassuol.sp.challenge.ecommerce.entity;
-
 import jakarta.persistence.*;
-
 import jakarta.validation.constraints.Past;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import java.util.Date;
 import java.util.List;
-
 @Getter
 @Setter
 @NoArgsConstructor
-
 @Entity
 @Table(name = "orders")
 public class Order {

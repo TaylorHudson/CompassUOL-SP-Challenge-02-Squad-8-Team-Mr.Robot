@@ -55,6 +55,13 @@ public class GlobalErrorHandler {
         return ResponseEntity.status(status).body(errors);
     }
 
+    @ExceptionHandler(EmptyProductException.class)
+    public ResponseEntity<ErrorMessage> handleMethodEmptyProductException(EmptyProductException ex) {
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        ErrorMessage error = createErrorResponse(status, ex);
+        return ResponseEntity.status(status).body(error);
+    }
+
     private ErrorMessage createErrorResponse(HttpStatus status, Exception ex) {
         return ErrorMessage
                 .builder()
@@ -72,5 +79,7 @@ public class GlobalErrorHandler {
                 .timestamp(System.currentTimeMillis())
                 .build();
     }
+
+
 
 }

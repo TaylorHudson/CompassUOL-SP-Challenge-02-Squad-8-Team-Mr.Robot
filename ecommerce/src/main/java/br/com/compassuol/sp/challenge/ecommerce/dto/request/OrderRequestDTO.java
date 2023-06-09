@@ -1,6 +1,5 @@
 package br.com.compassuol.sp.challenge.ecommerce.dto.request;
 
-import br.com.compassuol.sp.challenge.ecommerce.entity.Customer;
 import br.com.compassuol.sp.challenge.ecommerce.entity.Status;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,7 +17,8 @@ public class OrderRequestDTO {
 
         private int customerId;
 
-        private List<Integer> products;
+//        private List<ProductDTO> products;
+        private List<ProductQuantityRequestDTO> products;
 
         private Date date;
 

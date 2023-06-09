@@ -1,7 +1,5 @@
 package br.com.compassuol.sp.challenge.ecommerce.dto.response;
 
-import br.com.compassuol.sp.challenge.ecommerce.entity.Customer;
-import br.com.compassuol.sp.challenge.ecommerce.entity.Product;
 import br.com.compassuol.sp.challenge.ecommerce.entity.Status;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,5 +22,6 @@ public class OrderResponseDTO {
 
     private Status status;
 
-    private List<Product> products;
+//    private List<ProductDTO> products;
+    private List<ProductQuantityResponseDTO> products;
 }

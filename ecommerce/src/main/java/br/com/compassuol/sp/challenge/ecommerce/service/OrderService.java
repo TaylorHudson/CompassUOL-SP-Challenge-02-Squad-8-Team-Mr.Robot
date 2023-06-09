@@ -1,10 +1,16 @@
 package br.com.compassuol.sp.challenge.ecommerce.service;
 
 import br.com.compassuol.sp.challenge.ecommerce.dto.request.OrderRequestDTO;
+import br.com.compassuol.sp.challenge.ecommerce.dto.request.ProductDTO;
+import br.com.compassuol.sp.challenge.ecommerce.dto.request.ProductQuantityRequestDTO;
+import br.com.compassuol.sp.challenge.ecommerce.dto.request.ProductRequestDTO;
 import br.com.compassuol.sp.challenge.ecommerce.dto.response.OrderResponseDTO;
+import br.com.compassuol.sp.challenge.ecommerce.dto.response.ProductQuantityResponseDTO;
+import br.com.compassuol.sp.challenge.ecommerce.dto.response.ProductResponseDTO;
 import br.com.compassuol.sp.challenge.ecommerce.entity.Customer;
 import br.com.compassuol.sp.challenge.ecommerce.entity.Order;
 import br.com.compassuol.sp.challenge.ecommerce.entity.Product;
+import br.com.compassuol.sp.challenge.ecommerce.entity.ProductQuantity;
 import br.com.compassuol.sp.challenge.ecommerce.repository.CustomerRepository;
 import br.com.compassuol.sp.challenge.ecommerce.repository.OrderRepository;
 import br.com.compassuol.sp.challenge.ecommerce.repository.ProductRepository;
@@ -22,34 +28,78 @@ public class OrderService {
 
     private final OrderRepository orderRepository;
 
-    private final CustomerRepository customerRepository;
+    private final CustomerService customerService;
 
-    private final ProductRepository productRepository;
+    private final ProductService productService;
 
     private final ModelMapper mapper;
 
 
-    public OrderResponseDTO createOrder(OrderRequestDTO order){
+//    public OrderResponseDTO createOrder(OrderRequestDTO request){
+//
+//        var responseDTO = customerService.findCustomerById(request.getCustomerId());
+//        var customer = mapper.map(responseDTO, Customer.class);
+//
+//        List<ProductDTO> productsDTO = request.getProducts();
+//        List<Product> products = new ArrayList<>();
+//        productsDTO.forEach(p -> {
+//            ProductRequestDTO requestDTO = productService.findProductById(p.getProductId());
+//            Product product = mapper.map(requestDTO, Product.class);
+//            products.add(product);
+//        });
+//
+//        Order order = new Order();
+//        order.setCustomer(customer);
+//        order.setProducts(products);
+//        order.setDate(request.getDate());
+//        order.setStatus(request.getStatus());
+//
+//        Order saved = orderRepository.save(order);
+//
+//        return new OrderResponseDTO(saved.getOrderId(), request.getCustomerId(), saved.getDate(), saved.getStatus(), productsDTO);
+//
+//    }
 
-        Optional<Customer> customer = customerRepository.findById(order.getCustomerId());
+    public OrderResponseDTO createOrder(OrderRequestDTO request){
 
-        List<Product> products = new ArrayList<>();
+        var customerResponseDTO = customerService.findCustomerById(request.getCustomerId());
+        var customer = mapper.map(customerResponseDTO, Customer.class);
 
-        for (int productId: order.getProducts()) {
-           var recievedProduct = productRepository.findById(productId) ;
-           products.add(recievedProduct.get());
-        }
+        var productsQuantityDTO = request.getProducts();
 
-        Order createdOrder = mapper.map(order,Order.class);
+        List<ProductQuantity> products = new ArrayList<>();
+        productsQuantityDTO.forEach(p -> {
+            ProductResponseDTO requestDTO = productService.findProductById(p.getProductId());
+            Product product = mapper.map(requestDTO, Product.class);
 
-        createdOrder.setProducts(products);
-        createdOrder.setCustomer(customer.get());
+            ProductQuantity productQuantity = new ProductQuantity();
+            productQuantity.setProduct(product);
+            productQuantity.setQuantity(p.getQuantity());
 
-        createdOrder = orderRepository.save(createdOrder);
+            products.add(productQuantity);
+        });
 
+        List<ProductQuantityResponseDTO> responseDTO = new ArrayList<>();
+        productsQuantityDTO.forEach(p -> {
+            var productQuantityResponse = new ProductQuantityResponseDTO();
+            productQuantityResponse.setProductId(p.getProductId());
+            productQuantityResponse.setQuantity(p.getQuantity());
 
-        return mapper.map(createdOrder, OrderResponseDTO.class);
+            responseDTO.add(productQuantityResponse);
+        });
+
+        Order order = new Order();
+        order.setCustomer(customer);
+        order.setProducts(products);
+        order.setDate(request.getDate());
+        order.setStatus(request.getStatus());
+
+        Order saved = orderRepository.save(order);
+
+        return new OrderResponseDTO(saved.getOrderId(), request.getCustomerId(), saved.getDate(), saved.getStatus(),responseDTO);
+
     }
+
     public List<OrderResponseDTO> findAllOrders() {
         List<Order> orderList = orderRepository.findAll();
         List<OrderResponseDTO> orderResponseDTOList = new ArrayList<>();

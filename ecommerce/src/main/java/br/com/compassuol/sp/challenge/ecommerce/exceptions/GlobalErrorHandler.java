@@ -42,6 +42,12 @@ public class GlobalErrorHandler {
         ErrorMessage error = createErrorResponse(status, ex);
         return ResponseEntity.status(status).body(error);
     }
+    @ExceptionHandler(ProductNotFoundException.class)
+    public ResponseEntity<ErrorMessage> handleProductNotFoundException(ProductNotFoundException ex) {
+        HttpStatus status = HttpStatus.NOT_FOUND;
+        ErrorMessage error =  createErrorResponse(status, ex);
+        return ResponseEntity.status(status).body(error);
+    }
     
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<List<ErrorMessage>> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {

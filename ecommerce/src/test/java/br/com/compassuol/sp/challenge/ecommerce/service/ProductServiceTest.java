@@ -3,11 +3,11 @@ package br.com.compassuol.sp.challenge.ecommerce;
 import br.com.compassuol.sp.challenge.ecommerce.dto.request.ProductRequestDTO;
 import br.com.compassuol.sp.challenge.ecommerce.dto.response.ProductResponseDTO;
 import br.com.compassuol.sp.challenge.ecommerce.entity.Product;
+import br.com.compassuol.sp.challenge.ecommerce.exceptions.ProductNotFoundException;
 import br.com.compassuol.sp.challenge.ecommerce.exceptions.ProductPriceNotValidException;
 import br.com.compassuol.sp.challenge.ecommerce.exceptions.ResourceNotFoundException;
 import br.com.compassuol.sp.challenge.ecommerce.repository.ProductRepository;
 import br.com.compassuol.sp.challenge.ecommerce.service.ProductService;
-import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -19,9 +19,9 @@ import org.modelmapper.ModelMapper;
 
 import java.util.Optional;
 
-import static org.junit.Assert.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -59,15 +59,33 @@ class ProductServiceTest {
         verify(productRepository).findById(product.getProductId());
         verify(productRepository).delete(product);
 
-        assertThrows(ResourceNotFoundException.class, () -> productRepository.findById(product.getProductId()));
     }
 
+
+    @Test
+    void testUpdateProduct() {
+
+        Product product = createProductDefault();
+        product = productRepository.save(product);
+
+        ProductRequestDTO request = new ProductRequestDTO();
+        request.setName("New Skirt");
+        request.setPrice(59.99);
+        request.setDescription("Fabric silk");
+
+        ProductResponseDTO response = productService.updateProduct(product.getProductId(), request);
+
+        assertNotNull(response);
+        assertEquals(request.getName(), response.getName());
+        assertEquals(request.getPrice(), response.getPrice(), 0.001);
+        assertEquals(request.getDescription(), response.getDescription());
+    }
 
     @Test
     void updateProductErrorResourceNotFound() {
         when(productRepository.findById(anyInt())).thenReturn(Optional.empty());
 
-        assertThrows(ResourceNotFoundException.class, () -> productService.findProductById(1));
+        assertThrows(ProductNotFoundException.class, () -> productService.findProductById(1));
         verify(productRepository).findById(1);
     }
 

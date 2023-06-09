@@ -29,7 +29,7 @@ public class ProductService {
 
 	public ProductResponseDTO findProductById(int id) {
 		Product customer = productRepository.findById(id)
-				.orElseThrow(() -> new ResourceNotFoundException("Did not find customer with id - " + id));
+				.orElseThrow(() -> new ResourceNotFoundException("Did not find product with id - " + id));
 
 		return mapper.map(customer, ProductResponseDTO.class);
 	}

@@ -22,4 +22,7 @@ public class ProductRequestDTO {
     private double price;
 
     public int ProductId;
+
+    public ProductRequestDTO(String productName, double v, String productDescription) {
+    }
 }

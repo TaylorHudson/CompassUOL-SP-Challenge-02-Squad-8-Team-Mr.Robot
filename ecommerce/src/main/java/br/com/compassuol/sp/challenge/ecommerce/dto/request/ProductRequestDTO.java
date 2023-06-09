@@ -12,8 +12,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProductRequestDTO {
-
-    private int productId;
 	
 	@Size(min = 5,message = "The description must be at least 3 characters long")
     private String description;

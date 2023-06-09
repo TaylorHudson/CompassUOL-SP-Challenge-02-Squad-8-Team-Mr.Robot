@@ -22,7 +22,7 @@ public class ProductRestController {
 	    }
 
 	    @GetMapping("/products/{id}")
-	    public ResponseEntity<ProductRequestDTO> findProductById(@PathVariable int id){
+	    public ResponseEntity<ProductResponseDTO> findProductById(@PathVariable int id){
 	        var productDTO = productService.findProductById(id);
 	        return ResponseEntity.status(HttpStatus.OK).body(productDTO);
 	    }
@@ -34,7 +34,7 @@ public class ProductRestController {
 	    }
 
 	    @PostMapping("/products")
-	    public ResponseEntity<ProductRequestDTO> createProduct(@Valid @RequestBody ProductRequestDTO product) {
+	    public ResponseEntity<ProductResponseDTO> createProduct(@Valid @RequestBody ProductRequestDTO product) {
 	        var createdProduct = productService.createProduct(product);
 	        return ResponseEntity.status(HttpStatus.CREATED).body(createdProduct);
 	    }

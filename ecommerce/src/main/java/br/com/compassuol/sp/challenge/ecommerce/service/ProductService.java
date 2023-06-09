@@ -27,14 +27,14 @@ public class ProductService {
 		this.mapper = mapper;
 	}
 
-	public ProductRequestDTO findProductById(int id) {
+	public ProductResponseDTO findProductById(int id) {
 		Product customer = productRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Did not find customer with id - " + id));
 
-		return mapper.map(customer, ProductRequestDTO.class);
+		return mapper.map(customer, ProductResponseDTO.class);
 	}
 
-	public ProductRequestDTO createProduct(ProductRequestDTO product) {
+	public ProductResponseDTO createProduct(ProductRequestDTO product) {
 
 		Product createdProduct = mapper.map(product, Product.class);
 
@@ -44,7 +44,7 @@ public class ProductService {
 		
 		createdProduct = productRepository.save(createdProduct);
 
-		return mapper.map(createdProduct, ProductRequestDTO.class);
+		return mapper.map(createdProduct, ProductResponseDTO.class);
 	}
 
 	public List<ProductResponseDTO> findAllProducts(){
@@ -58,6 +58,8 @@ public class ProductService {
 	    	
 	    	return productsListDTO;
 	    }
+	
+	
 	public ProductResponseDTO updateProduct(int id, ProductRequestDTO request) {
 		Product product = productRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("The id supplied must be from a product that is already created"));
@@ -68,6 +70,7 @@ public class ProductService {
 		Product updatedProduct = productRepository.save(product);
 		return mapper.map(updatedProduct, ProductResponseDTO.class);
 	}
+	
 
 	public void deleteProduct(int id) {
 		Product product = productRepository.findById(id)

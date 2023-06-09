@@ -78,7 +78,7 @@ public class ProductRestControllerTest {
 
         ObjectMapper objectMapper = new ObjectMapper();
 
-        mockMvc.perform(put("/v1/products/{id}", productId)
+         mockMvc.perform(put("/v1/products/{id}", productId)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isOk())

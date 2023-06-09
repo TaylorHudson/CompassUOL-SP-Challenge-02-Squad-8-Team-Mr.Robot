@@ -1,4 +1,4 @@
-package br.com.compassuol.sp.challenge.ecommerce;
+package br.com.compassuol.sp.challenge.ecommerce.service;
 
 import br.com.compassuol.sp.challenge.ecommerce.dto.request.ProductRequestDTO;
 import br.com.compassuol.sp.challenge.ecommerce.dto.response.ProductResponseDTO;
@@ -17,11 +17,12 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
 
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -88,7 +89,6 @@ class ProductServiceTest {
         assertThrows(ProductNotFoundException.class, () -> productService.findProductById(1));
         verify(productRepository).findById(1);
     }
-
 
 }
 

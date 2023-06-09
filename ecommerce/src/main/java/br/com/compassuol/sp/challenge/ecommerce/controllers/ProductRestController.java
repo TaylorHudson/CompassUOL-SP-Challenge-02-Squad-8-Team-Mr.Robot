@@ -4,12 +4,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import br.com.compassuol.sp.challenge.ecommerce.dto.request.ProductRequestDTO;
 import br.com.compassuol.sp.challenge.ecommerce.dto.response.ProductResponseDTO;
@@ -39,9 +34,20 @@ public class ProductRestController {
 	    }
 
 	    @PostMapping("/products")
-	    public ResponseEntity<ProductRequestDTO> createProduct(@Valid @RequestBody ProductRequestDTO product) {
+	    public ResponseEntity<ProductResponseDTO> createProduct(@Valid @RequestBody ProductRequestDTO product) {
 	        var createdProduct = productService.createProduct(product);
 	        return ResponseEntity.status(HttpStatus.CREATED).body(createdProduct);
 	    }
-	
+
+		@DeleteMapping("/products/{id}")
+		public ResponseEntity<ProductResponseDTO> deleteProduct(@PathVariable  int id) {
+		productService.deleteProduct(id);
+		return ResponseEntity.ok().build();
+		}
+
+		@PutMapping("/products/{id}")
+		public ResponseEntity<ProductResponseDTO> updateProduct(@PathVariable int id, @Valid @RequestBody ProductRequestDTO product) {
+			var updatedProduct = productService.updateProduct(id, product);
+			return ResponseEntity.status(HttpStatus.OK).body(updatedProduct);
+		}
 }

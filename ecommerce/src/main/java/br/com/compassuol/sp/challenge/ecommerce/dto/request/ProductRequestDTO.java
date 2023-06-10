@@ -13,10 +13,10 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ProductRequestDTO {
 
-    @Size(min = 3,message = "The name ins't in the correct size")
+
     private String name;
 
-    @Size(min = 5,message = "The description must be at least 3 characters long")
+
     private String description;
 	
     private double price;

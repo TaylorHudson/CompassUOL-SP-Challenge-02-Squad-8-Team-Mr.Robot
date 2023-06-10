@@ -1,5 +1,7 @@
 create database challenge2;
 use challenge2;
+drop database challenge2;
+
 
 CREATE TABLE IF NOT EXISTS customer (
     customer_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -24,6 +26,15 @@ CREATE TABLE IF NOT EXISTS Orders(
     FOREIGN KEY (customer_id) REFERENCES Customer (customer_id)
     );
 
+CREATE TABLE payment (
+   payment_id INT AUTO_INCREMENT PRIMARY KEY,
+   payment_method VARCHAR(12) NOT NULL,
+   payment_date DATE NOT NULL,
+   order_id INT NOT NULL,
+   FOREIGN KEY (order_id) REFERENCES orders(order_id)
+);
+
+
 CREATE TABLE IF NOT EXISTS product_quantity(
     product_quantity_id INT AUTO_INCREMENT PRIMARY KEY,
     product_id INT NOT NULL,
@@ -33,10 +44,3 @@ CREATE TABLE IF NOT EXISTS product_quantity(
     FOREIGN KEY (order_id) REFERENCES orders (order_id)
     );
 
-CREATE TABLE payment (
-     payment_id INT AUTO_INCREMENT PRIMARY KEY,
-     payment_method VARCHAR(12) NOT NULL,
-     payment_date DATE NOT NULL,
-     order_id INT NOT NULL,
-     FOREIGN KEY (order_id) REFERENCES orders(order_id)
-);

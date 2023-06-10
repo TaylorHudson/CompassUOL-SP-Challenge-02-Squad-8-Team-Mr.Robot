@@ -5,11 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="141d762e-9bea-4007-92fe-2c17e33e9e43" name="Changes" comment="fix: changed RequestDTO for ResponseDTO">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/82a24659-1596-45b7-95c2-ec2a91fc9873.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/82a24659-1596-45b7-95c2-ec2a91fc9873.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecommerce/src/main/java/br/com/compassuol/sp/challenge/ecommerce/exceptions/ProductNotFoundException.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/ecommerce/src/main/java/br/com/compassuol/sp/challenge/ecommerce/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce/src/main/java/br/com/compassuol/sp/challenge/ecommerce/service/ProductService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ecommerce/src/test/java/br/com/compassuol/sp/challenge/ecommerce/controllers/ProductRestControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce/src/test/java/br/com/compassuol/sp/challenge/ecommerce/controllers/ProductRestControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecommerce/src/test/java/br/com/compassuol/sp/challenge/ecommerce/service/ProductServiceTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecommerce/src/test/java/br/com/compassuol/sp/challenge/ecommerce/service/ProductServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce/src/test/java/br/com/compassuol/sp/challenge/ecommerce/service/ProductServiceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,8 +100,8 @@
       <recent name="br.com.compassuol.sp.challenge.ecommerce.service" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.ProductServiceTest.testUpdateProduct">
-    <configuration name="ProductRestControllerTest.deleteProduct_Success" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.ProductRestControllerTest">
+    <configuration name="ProductRestControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ecommerce" />
       <extension name="coverage">
         <pattern>
@@ -111,7 +111,22 @@
       </extension>
       <option name="PACKAGE_NAME" value="br.com.compassuol.sp.challenge.ecommerce.controllers" />
       <option name="MAIN_CLASS_NAME" value="br.com.compassuol.sp.challenge.ecommerce.controllers.ProductRestControllerTest" />
-      <option name="METHOD_NAME" value="deleteProduct_Success" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ProductRestControllerTest.testUpdateProduct_ProductNotFoundException" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ecommerce" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="br.com.compassuol.sp.challenge.ecommerce.controllers.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="br.com.compassuol.sp.challenge.ecommerce.controllers" />
+      <option name="MAIN_CLASS_NAME" value="br.com.compassuol.sp.challenge.ecommerce.controllers.ProductRestControllerTest" />
+      <option name="METHOD_NAME" value="testUpdateProduct_ProductNotFoundException" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -133,23 +148,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ProductRestControllerTest.updateProduct_ProductNotFoundException" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ecommerce" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="br.com.compassuol.sp.challenge.ecommerce.controllers.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="br.com.compassuol.sp.challenge.ecommerce.controllers" />
-      <option name="MAIN_CLASS_NAME" value="br.com.compassuol.sp.challenge.ecommerce.controllers.ProductRestControllerTest" />
-      <option name="METHOD_NAME" value="updateProduct_ProductNotFoundException" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ProductServiceTest.findAllProductsTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ProductServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ecommerce" />
       <extension name="coverage">
         <pattern>
@@ -159,8 +158,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="br.com.compassuol.sp.challenge.ecommerce.service" />
       <option name="MAIN_CLASS_NAME" value="br.com.compassuol.sp.challenge.ecommerce.service.ProductServiceTest" />
-      <option name="METHOD_NAME" value="findAllProductsTest" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -190,11 +188,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.ProductRestControllerTest" />
+        <item itemvalue="JUnit.ProductServiceTest" />
         <item itemvalue="JUnit.ProductServiceTest.testUpdateProduct" />
-        <item itemvalue="JUnit.ProductServiceTest.findAllProductsTest" />
-        <item itemvalue="JUnit.ProductRestControllerTest.deleteProduct_Success" />
         <item itemvalue="JUnit.ProductRestControllerTest.testUpdateProduct_Success" />
-        <item itemvalue="JUnit.ProductRestControllerTest.updateProduct_ProductNotFoundException" />
+        <item itemvalue="JUnit.ProductRestControllerTest.testUpdateProduct_ProductNotFoundException" />
       </list>
     </recent_temporary>
   </component>
@@ -217,7 +215,8 @@
       <workItem from="1686322237498" duration="365000" />
       <workItem from="1686322642706" duration="11483000" />
       <workItem from="1686334735202" duration="1078000" />
-      <workItem from="1686335959556" duration="1062000" />
+      <workItem from="1686335959556" duration="4517000" />
+      <workItem from="1686403435503" duration="1007000" />
     </task>
     <task id="LOCAL-00001" summary="fix: changed RequestDTO for ResponseDTO">
       <created>1686248965093</created>

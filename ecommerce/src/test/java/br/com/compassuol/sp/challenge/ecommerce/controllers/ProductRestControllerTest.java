@@ -3,7 +3,7 @@ package br.com.compassuol.sp.challenge.ecommerce.controllers;
 import br.com.compassuol.sp.challenge.ecommerce.Utils;
 import br.com.compassuol.sp.challenge.ecommerce.dto.request.ProductRequestDTO;
 import br.com.compassuol.sp.challenge.ecommerce.dto.response.ProductResponseDTO;
-import br.com.compassuol.sp.challenge.ecommerce.exceptions.ProductNotFoundException;
+import br.com.compassuol.sp.challenge.ecommerce.exceptions.ResourceNotFoundException;
 import br.com.compassuol.sp.challenge.ecommerce.service.ProductService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
@@ -26,7 +26,7 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standal
 
 @WebMvcTest
 public class ProductRestControllerTest {
-    private ProductResponseDTO createUpdatedProductResponse() {
+    private ProductResponseDTO UpdatedProductResponse() {
         ProductResponseDTO response = new ProductResponseDTO();
         response.setName("New Product");
         response.setPrice(9.99);
@@ -70,7 +70,7 @@ public class ProductRestControllerTest {
         request.setDescription("Updated description");
 
         when(productService.updateProduct(eq(productId), any(ProductRequestDTO.class)))
-                .thenReturn(createUpdatedProductResponse());
+                .thenReturn(UpdatedProductResponse());
 
         ProductRestController productController = new ProductRestController(productService);
         MockMvc mockMvc = standaloneSetup(productController).build();
@@ -94,7 +94,7 @@ public class ProductRestControllerTest {
         int productId = 1;
         ProductRequestDTO productRequest = new ProductRequestDTO();
 
-        when(productService.updateProduct(productId, productRequest)).thenThrow(new ProductNotFoundException("Product not found"));
+        when(productService.updateProduct(productId, productRequest)).thenThrow(new ResourceNotFoundException("Product not found"));
 
         ProductRestController productController = new ProductRestController(productService);
 

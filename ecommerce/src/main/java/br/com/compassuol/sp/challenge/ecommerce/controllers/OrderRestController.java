@@ -2,7 +2,6 @@ package br.com.compassuol.sp.challenge.ecommerce.controllers;
 
 import br.com.compassuol.sp.challenge.ecommerce.dto.request.OrderRequestDTO;
 import br.com.compassuol.sp.challenge.ecommerce.dto.response.OrderResponseDTO;
-import br.com.compassuol.sp.challenge.ecommerce.entity.Order;
 import br.com.compassuol.sp.challenge.ecommerce.service.OrderService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -28,5 +27,11 @@ public class OrderRestController {
     public ResponseEntity<OrderResponseDTO> createOrder(@RequestBody OrderRequestDTO order){
         var createdOrder = orderService.createOrder(order);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdOrder);
+    }
+
+    @GetMapping("/orders/customers/{customerId}")
+    public ResponseEntity<List<OrderResponseDTO>> findAllOrderByCustomerId(@PathVariable Integer customerId){
+        var orders = orderService.findAllOrderByCustomerId(customerId);
+        return ResponseEntity.status(HttpStatus.OK).body(orders);
     }
 }

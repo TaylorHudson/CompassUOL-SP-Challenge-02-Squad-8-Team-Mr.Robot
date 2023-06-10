@@ -1,4 +1,4 @@
-package br.com.compassuol.sp.challenge.ecommerce;
+package br.com.compassuol.sp.challenge.ecommerce.utils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

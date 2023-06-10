@@ -1,6 +1,6 @@
 package br.com.compassuol.sp.challenge.ecommerce.controllers;
 
-import br.com.compassuol.sp.challenge.ecommerce.Utils;
+import br.com.compassuol.sp.challenge.ecommerce.utils.Utils;
 import br.com.compassuol.sp.challenge.ecommerce.dto.request.CustomerRequestDTO;
 import br.com.compassuol.sp.challenge.ecommerce.dto.response.CustomerResponseDTO;
 import br.com.compassuol.sp.challenge.ecommerce.exceptions.InvalidCpfOrEmailException;

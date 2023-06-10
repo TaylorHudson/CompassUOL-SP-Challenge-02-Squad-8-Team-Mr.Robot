@@ -29,6 +29,6 @@ public class Payment {
     private LocalDate paymentDate;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name= "payment")
+    @JoinColumn(name= "order_id")
     private Order order;
 }

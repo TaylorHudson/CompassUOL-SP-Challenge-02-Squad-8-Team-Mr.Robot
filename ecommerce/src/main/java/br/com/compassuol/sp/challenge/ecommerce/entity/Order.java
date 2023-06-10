@@ -33,5 +33,6 @@ public class Order {
     private List<ProductQuantity> products;
 
 
-
+    @OneToOne(fetch = FetchType.LAZY,mappedBy = "order",cascade = CascadeType.ALL)
+    private Payment payment;
 }

@@ -17,7 +17,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "product")
 public class Product {
-	@Column(name = "productID")
+	@Column(name = "product_Id")
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int productId;

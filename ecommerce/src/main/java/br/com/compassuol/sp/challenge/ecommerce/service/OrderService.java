@@ -10,9 +10,11 @@ import br.com.compassuol.sp.challenge.ecommerce.entity.Order;
 import br.com.compassuol.sp.challenge.ecommerce.entity.Product;
 import br.com.compassuol.sp.challenge.ecommerce.entity.ProductQuantity;
 import br.com.compassuol.sp.challenge.ecommerce.exceptions.EmptyProductException;
+import br.com.compassuol.sp.challenge.ecommerce.exceptions.ResourceNotFoundException;
 import br.com.compassuol.sp.challenge.ecommerce.repository.OrderRepository;
 import br.com.compassuol.sp.challenge.ecommerce.repository.ProductQuantityRepository;
 import lombok.AllArgsConstructor;
+import org.apache.coyote.Request;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -128,6 +130,14 @@ public class OrderService {
         });
 
         return responseDTO;
+    }
+
+    public OrderResponseDTO findOrderById(int id){
+        var order = orderRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Did not find order with id - " + id));
+
+        return mapper.map(order,OrderResponseDTO.class);
+
     }
 
 }

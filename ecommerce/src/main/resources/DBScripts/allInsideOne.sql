@@ -32,3 +32,11 @@ CREATE TABLE IF NOT EXISTS product_quantity(
     FOREIGN KEY (product_id) REFERENCES Product (product_id),
     FOREIGN KEY (order_id) REFERENCES orders (order_id)
 );
+
+CREATE TABLE payments (
+     id INT PRIMARY KEY,
+     payment_method VARCHAR(12),
+     payment_date DATETIME,
+     order_id INT,
+     FOREIGN KEY (order_id) REFERENCES orders(order_id)
+);

@@ -34,12 +34,16 @@ public class Order {
     @OneToMany(mappedBy = "order")
     private List<ProductQuantity> products;
 
+    @OneToOne(fetch = FetchType.LAZY,mappedBy = "order",cascade = CascadeType.ALL)
+    private Payment payment;
+
     public Order(LocalDate date, Status status, Customer customer, List<ProductQuantity> products) {
         this.date = date;
         this.status = status;
         this.customer = customer;
         this.products = products;
     }
+
 
     public Order(int orderId, LocalDate date, Status status, Customer customer, List<ProductQuantity> products) {
         this.orderId = orderId;

@@ -11,10 +11,11 @@ import br.com.compassuol.sp.challenge.ecommerce.entity.Product;
 import br.com.compassuol.sp.challenge.ecommerce.entity.ProductQuantity;
 import br.com.compassuol.sp.challenge.ecommerce.exceptions.EmptyProductException;
 import br.com.compassuol.sp.challenge.ecommerce.repository.OrderRepository;
-import br.com.compassuol.sp.challenge.ecommerce.repository.ProductQuantityRespository;
+import br.com.compassuol.sp.challenge.ecommerce.repository.ProductQuantityRepository;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +29,7 @@ public class OrderService {
 
     private final ProductService productService;
 
-    private final ProductQuantityRespository productQuantityRespository;
+    private final ProductQuantityRepository productQuantityRepository;
 
     private final ModelMapper mapper;
 
@@ -51,7 +52,7 @@ public class OrderService {
 
         products.forEach(productQuantity -> {
             productQuantity.setOrder(saved);
-            productQuantityRespository.save(productQuantity);
+            productQuantityRepository.save(productQuantity);
         });
 
         return new OrderResponseDTO(saved.getOrderId(), request.getCustomerId(), saved.getDate(), saved.getStatus(),responseDTO);

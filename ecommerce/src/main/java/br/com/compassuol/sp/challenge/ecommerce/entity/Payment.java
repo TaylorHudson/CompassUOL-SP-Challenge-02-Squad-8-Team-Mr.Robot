@@ -27,6 +27,7 @@ public class Payment {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate paymentDate;
 
-    @OneToOne(fetch = FetchType.LAZY,mappedBy = "payment")
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name= "payment")
     private Order order;
 }

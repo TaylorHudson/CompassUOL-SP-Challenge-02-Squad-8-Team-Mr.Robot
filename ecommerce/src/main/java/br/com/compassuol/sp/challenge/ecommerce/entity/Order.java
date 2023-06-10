@@ -34,7 +34,8 @@ public class Order {
     @OneToMany(mappedBy = "order")
     private List<ProductQuantity> products;
 
-    @OneToOne(fetch = FetchType.LAZY,mappedBy = "order",cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JoinColumn(name = "order")
     private Payment payment;
 
     public Order(LocalDate date, Status status, Customer customer, List<ProductQuantity> products) {

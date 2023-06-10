@@ -26,7 +26,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import br.com.compassuol.sp.challenge.ecommerce.Utils;
+import br.com.compassuol.sp.challenge.ecommerce.utils.Utils;
 import br.com.compassuol.sp.challenge.ecommerce.dto.request.ProductRequestDTO;
 import br.com.compassuol.sp.challenge.ecommerce.dto.response.ProductResponseDTO;
 import br.com.compassuol.sp.challenge.ecommerce.exceptions.ProductNotFoundException;

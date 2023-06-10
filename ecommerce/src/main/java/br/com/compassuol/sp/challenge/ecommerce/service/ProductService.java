@@ -3,6 +3,7 @@ package br.com.compassuol.sp.challenge.ecommerce.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.compassuol.sp.challenge.ecommerce.exceptions.ProductPriceNotValidException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,7 +11,6 @@ import org.springframework.stereotype.Service;
 import br.com.compassuol.sp.challenge.ecommerce.dto.request.ProductRequestDTO;
 import br.com.compassuol.sp.challenge.ecommerce.dto.response.ProductResponseDTO;
 import br.com.compassuol.sp.challenge.ecommerce.entity.Product;
-import br.com.compassuol.sp.challenge.ecommerce.exceptions.ProductPriceNotValidException;
 import br.com.compassuol.sp.challenge.ecommerce.exceptions.ResourceNotFoundException;
 import br.com.compassuol.sp.challenge.ecommerce.repository.ProductRepository;
 
@@ -28,10 +28,10 @@ public class ProductService {
 	}
 
 	public ProductResponseDTO findProductById(int id) {
-		Product customer = productRepository.findById(id)
+		Product product = productRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Did not find product with id - " + id));
 
-		return mapper.map(customer, ProductResponseDTO.class);
+		return mapper.map(product, ProductResponseDTO.class);
 	}
 
 	public ProductResponseDTO createProduct(ProductRequestDTO product) {
@@ -41,7 +41,7 @@ public class ProductService {
 		if(createdProduct.getPrice() == 0 || createdProduct.getPrice() < 0) {
 			throw new ProductPriceNotValidException("Product price not valid");
 		}
-		
+
 		createdProduct = productRepository.save(createdProduct);
 
 		return mapper.map(createdProduct, ProductResponseDTO.class);

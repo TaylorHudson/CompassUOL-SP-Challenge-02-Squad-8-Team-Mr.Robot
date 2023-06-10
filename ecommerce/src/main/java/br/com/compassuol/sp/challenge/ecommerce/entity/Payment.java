@@ -7,8 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.time.LocalDateTime;
-import java.util.Date;
+
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -25,7 +25,7 @@ public class Payment {
     private PaymentMethod paymentMethod;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDateTime paymentDate;
+    private LocalDate paymentDate;
 
     @OneToOne(fetch = FetchType.LAZY,mappedBy = "payment")
     private Order order;

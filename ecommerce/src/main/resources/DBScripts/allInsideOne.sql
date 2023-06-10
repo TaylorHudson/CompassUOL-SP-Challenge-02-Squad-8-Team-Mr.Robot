@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS product_quantity(
     );
 
 CREATE TABLE payment (
-     id INT PRIMARY KEY,
+     payment_id INT AUTO_INCREMENT PRIMARY KEY,
      payment_method VARCHAR(12) NOT NULL,
      payment_date DATE NOT NULL,
      order_id INT NOT NULL,

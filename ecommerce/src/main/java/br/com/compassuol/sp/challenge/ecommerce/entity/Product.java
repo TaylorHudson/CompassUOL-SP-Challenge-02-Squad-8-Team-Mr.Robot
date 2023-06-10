@@ -17,17 +17,16 @@ import lombok.Setter;
 @Entity
 @Table(name = "product")
 public class Product {
-	
+	@Column(name = "product_Id")
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "product_Id")
     private int productId;
-
+    @Column(name = "name")
     @Size(min = 2,message = "The name must be at least 2 characters long")
     private String name;
-
+    @Column(name = "price")
     private double price ;
-
+    @Column(name = "description")
     @Size(min = 3,message = "The description must be at least 3 characters long")
     private String description;
 
@@ -38,6 +37,4 @@ public class Product {
 		this.price = price;
 		this.description = description;
 	}
-
-    
 }

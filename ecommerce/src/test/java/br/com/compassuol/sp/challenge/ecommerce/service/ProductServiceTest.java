@@ -2,8 +2,10 @@ package br.com.compassuol.sp.challenge.ecommerce.service;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -11,6 +13,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import br.com.compassuol.sp.challenge.ecommerce.dto.request.ProductRequestDTO;
+import br.com.compassuol.sp.challenge.ecommerce.dto.response.ProductResponseDTO;
+import br.com.compassuol.sp.challenge.ecommerce.entity.Product;
+import br.com.compassuol.sp.challenge.ecommerce.exceptions.ProductNotFoundException;
+import br.com.compassuol.sp.challenge.ecommerce.exceptions.ProductPriceNotValidException;
+import br.com.compassuol.sp.challenge.ecommerce.exceptions.ResourceNotFoundException;
+import br.com.compassuol.sp.challenge.ecommerce.repository.ProductRepository;
+import br.com.compassuol.sp.challenge.ecommerce.service.ProductService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -18,12 +28,6 @@ import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
-
-import br.com.compassuol.sp.challenge.ecommerce.dto.request.ProductRequestDTO;
-import br.com.compassuol.sp.challenge.ecommerce.dto.response.ProductResponseDTO;
-import br.com.compassuol.sp.challenge.ecommerce.entity.Product;
-import br.com.compassuol.sp.challenge.ecommerce.exceptions.ResourceNotFoundException;
-import br.com.compassuol.sp.challenge.ecommerce.repository.ProductRepository;
 
 
 @ExtendWith(MockitoExtension.class)
@@ -37,7 +41,6 @@ public class ProductServiceTest {
     @InjectMocks
     private ProductService productService;
 
-
     private Product createProductDefault() {
         Product product = new Product("Skirt", 54.99, "Fabric cotton" );
         product.setProductId(1);
@@ -48,7 +51,6 @@ public class ProductServiceTest {
     private ProductResponseDTO createExpectedResponseDefault() {
         return new ProductResponseDTO(1, "Skirt", 54.99, "Fabric cotton");
     }
-
     
     @Test
     public void findAllProductsTest() {
@@ -123,7 +125,7 @@ public class ProductServiceTest {
     @Test
     public void createProductTest(){
     	
-        ProductRequestDTO productRequest = new ProductRequestDTO("Skirt", "Fabric cotton", 54.99);
+        ProductRequestDTO productRequest = new ProductRequestDTO("Fabric cotton", "Skirt", 54.99, 1);
         Product product = createProductDefault();
                 
        
@@ -140,7 +142,52 @@ public class ProductServiceTest {
         );
         	
         verify(productRepository).save(any(Product.class));
-        }
+        
     }
 
     
+    @Test
+    void testDeleteProduct() {
+        Product product = createProductDefault();
+
+        when(productRepository.findById(product.getProductId())).thenReturn(Optional.of(product));
+
+        productService.deleteProduct(product.getProductId());
+
+        verify(productRepository).findById(product.getProductId());
+        verify(productRepository).delete(product);
+
+    }
+
+
+    @Test
+    void testUpdateProduct() {
+
+        Product product = createProductDefault();
+        product = productRepository.save(product);
+        
+        ProductRequestDTO request = new ProductRequestDTO();
+        request.setName("New Skirt");
+        request.setPrice(59.99);
+        request.setDescription("Fabric silk");
+
+        ProductResponseDTO response = productService.updateProduct(product.getProductId(), request);
+
+        assertNotNull(response);
+        assertEquals(request.getName(), response.getName());
+        assertEquals(request.getPrice(), response.getPrice(), 0.001);
+        assertEquals(request.getDescription(), response.getDescription());
+    }
+
+    @Test
+    void updateProductErrorResourceNotFound() {
+        when(productRepository.findById(anyInt())).thenReturn(Optional.empty());
+
+        assertThrows(ProductNotFoundException.class, () -> productService.findProductById(1));
+        verify(productRepository).findById(1);
+    }
+
+}
+
+
+

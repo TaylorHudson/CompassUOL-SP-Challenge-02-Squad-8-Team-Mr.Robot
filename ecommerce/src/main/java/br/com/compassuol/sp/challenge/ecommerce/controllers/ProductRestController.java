@@ -40,7 +40,7 @@ public class ProductRestController {
 	    }
 
 		@DeleteMapping("/products/{id}")
-		public ResponseEntity<ProductResponseDTO> deleteProduct(@PathVariable int id) {
+		public ResponseEntity<ProductResponseDTO> deleteProduct(@PathVariable  int id) {
 		productService.deleteProduct(id);
 		return ResponseEntity.ok().build();
 		}

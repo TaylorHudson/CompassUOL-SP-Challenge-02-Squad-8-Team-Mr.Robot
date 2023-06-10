@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class GlobalErrorHandler {
 
-    private static final Class<? extends Throwable>[] ProductPriceNotValidException = null;
 
 	@ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorMessage> handleGenericException(Exception ex) {
@@ -40,6 +39,12 @@ public class GlobalErrorHandler {
     public ResponseEntity<ErrorMessage> handleProductPriceNotValidException(ProductPriceNotValidException ex){
     	HttpStatus status = HttpStatus.NOT_ACCEPTABLE;
         ErrorMessage error = createErrorResponse(status, ex);
+        return ResponseEntity.status(status).body(error);
+    }
+    @ExceptionHandler(ProductNotFoundException.class)
+    public ResponseEntity<ErrorMessage> handleProductNotFoundException(ProductNotFoundException ex) {
+        HttpStatus status = HttpStatus.NOT_FOUND;
+        ErrorMessage error =  createErrorResponse(status, ex);
         return ResponseEntity.status(status).body(error);
     }
     

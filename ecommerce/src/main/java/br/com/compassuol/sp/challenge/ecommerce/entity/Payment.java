@@ -24,7 +24,7 @@ public class Payment {
     @Enumerated(EnumType.STRING)
     private PaymentMethod paymentMethod;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDateTime paymentDate;
 
     @OneToOne(fetch = FetchType.LAZY,mappedBy = "payment")

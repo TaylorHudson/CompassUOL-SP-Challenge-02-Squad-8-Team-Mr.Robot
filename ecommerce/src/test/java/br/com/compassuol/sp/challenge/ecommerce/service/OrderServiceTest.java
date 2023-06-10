@@ -5,11 +5,13 @@ import br.com.compassuol.sp.challenge.ecommerce.dto.request.ProductQuantityReque
 import br.com.compassuol.sp.challenge.ecommerce.dto.response.CustomerResponseDTO;
 import br.com.compassuol.sp.challenge.ecommerce.dto.response.OrderResponseDTO;
 import br.com.compassuol.sp.challenge.ecommerce.dto.response.ProductResponseDTO;
-import br.com.compassuol.sp.challenge.ecommerce.entity.*;
+import br.com.compassuol.sp.challenge.ecommerce.entity.Customer;
+import br.com.compassuol.sp.challenge.ecommerce.entity.Order;
+import br.com.compassuol.sp.challenge.ecommerce.entity.ProductQuantity;
+import br.com.compassuol.sp.challenge.ecommerce.entity.Status;
 import br.com.compassuol.sp.challenge.ecommerce.exceptions.EmptyProductException;
-import br.com.compassuol.sp.challenge.ecommerce.repository.CustomerRepository;
 import br.com.compassuol.sp.challenge.ecommerce.repository.OrderRepository;
-import br.com.compassuol.sp.challenge.ecommerce.repository.ProductRepository;
+import br.com.compassuol.sp.challenge.ecommerce.repository.ProductQuantityRepository;
 import br.com.compassuol.sp.challenge.ecommerce.utils.OrderUtil;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -19,12 +21,12 @@ import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.*;
@@ -38,6 +40,8 @@ class OrderServiceTest {
     private CustomerService customerService;
     @Mock
     private ProductService productService;
+    @Mock
+    private ProductQuantityRepository productQuantityRepository;
 
     @Spy
     private ModelMapper mapper;
@@ -48,15 +52,15 @@ class OrderServiceTest {
     @Test
     void createOrderSuccess() {
 
-        List<ProductQuantityRequestDTO> orderItem = new ArrayList<>();
-        orderItem.add(new ProductQuantityRequestDTO());
-
         Order order = OrderUtil.createOrderDefault();
-        OrderRequestDTO orderRequestDTO = new OrderRequestDTO(1, orderItem,new Date(),Status.CREATED);
+        OrderRequestDTO orderRequestDTO = OrderUtil.createOrderRequest();
+
+        var productQuantity = new ProductQuantity();
 
         when(customerService.findCustomerById(anyInt())).thenReturn(new CustomerResponseDTO());
         when(productService.findProductById(anyInt())).thenReturn(new ProductResponseDTO());
         when(orderRepository.save(any(Order.class))).thenReturn(order);
+        when(productQuantityRepository.save(any(ProductQuantity.class))).thenReturn(productQuantity);
 
        OrderResponseDTO orderResponseDTO =  orderService.createOrder(orderRequestDTO);
 
@@ -68,7 +72,7 @@ class OrderServiceTest {
     @Test
     void createOrderEmptyProductException() {
 
-        OrderRequestDTO orderRequestDTO = new OrderRequestDTO(1, new ArrayList<ProductQuantityRequestDTO>(),new Date(),Status.CREATED);
+        OrderRequestDTO orderRequestDTO = new OrderRequestDTO(1, new ArrayList<ProductQuantityRequestDTO>(), LocalDate.now(),Status.CREATED);
 
         when(customerService.findCustomerById(anyInt())).thenReturn(new CustomerResponseDTO());
 
@@ -78,7 +82,7 @@ class OrderServiceTest {
 
     @Test
     void findAllOrdersSuccess() {
-        Order order = new Order(1,new Date(), Status.CREATED,new Customer(),new ArrayList<ProductQuantity>());
+        Order order = new Order(1, LocalDate.now(), Status.CREATED,new Customer(),new ArrayList<ProductQuantity>());
         List<Order> orderList= new ArrayList<>();
         orderList.add(order);
 
@@ -89,6 +93,22 @@ class OrderServiceTest {
         verify(orderRepository).findAll();
         assertEquals(1,orderResponseDTOList.size());
         assertEquals(Status.CREATED,orderResponseDTOList.get(0).getStatus());
+    }
+
+    @Test
+    void findAllOrderByCustomerId() {
+        var customerResponse = new CustomerResponseDTO(1, "John Doe", "12345678910", "john.doe@gmail.com");
+        var orders = new ArrayList<Order>();
+        orders.add(OrderUtil.createOrderDefault());
+
+        when(customerService.findCustomerById(anyInt())).thenReturn(customerResponse);
+        when(orderRepository.findAllByCustomer(any(Customer.class))).thenReturn(orders);
+
+        var ordersResponse = orderService.findAllOrderByCustomerId(anyInt());
+
+        verify(orderRepository).findAllByCustomer(any(Customer.class));
+        assertEquals(1, ordersResponse.size());
+        assertEquals(1, ordersResponse.get(0).getCustomerId());
     }
 
 }

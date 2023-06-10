@@ -44,9 +44,9 @@ public class CustomerService {
 
         Customer createdCustomer = mapper.map(customer,Customer.class);
 
-        createdCustomer = customerRepository.save(createdCustomer);
-
         createdCustomer.setActive(true);
+
+        createdCustomer = customerRepository.save(createdCustomer);
 
         return mapper.map(createdCustomer,CustomerResponseDTO.class);
     }

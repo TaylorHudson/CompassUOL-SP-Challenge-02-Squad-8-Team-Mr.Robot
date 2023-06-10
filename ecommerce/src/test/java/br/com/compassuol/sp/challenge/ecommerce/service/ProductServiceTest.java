@@ -52,8 +52,63 @@ public class ProductServiceTest {
         return new ProductResponseDTO(1, "Skirt", 54.99, "Fabric cotton");
     }
     
+    
+	@Test
+    public void findProductByIdSuccessTest() {
+
+        Product product = createProductDefault();
+        ProductResponseDTO expectedResponse = createExpectedResponseDefault();
+    	
+    	when(productRepository.findById(any())).thenReturn(Optional.of(product));
+    	
+    	ProductResponseDTO request = productService.findProductById(1);
+    	
+    	assertAll("response",
+    			() -> assertEquals(expectedResponse.getName(), request.getName()),
+    			() -> assertEquals(expectedResponse.getPrice(), request.getPrice(), 0.01),
+    			() -> assertEquals(expectedResponse.getDescription(), request.getDescription()),
+    			() -> assertEquals(1, request.getProductId())
+    		);
+    	verify(productRepository).findById(1);
+    }
+
+	
     @Test
-    public void findAllProductsTest() {
+    public void findProductByIdErrorResourceNotFoundTest() throws ResourceNotFoundException{
+    	
+    	
+    	when(productRepository.findById(1)).thenThrow(ResourceNotFoundException.class);
+    	
+        assertThrows(ResourceNotFoundException.class, () -> productService.findProductById(1));
+        verify(productRepository).findById(1);
+    }
+
+    
+    
+    @Test
+    public void createProductSuccessTest(){
+    	
+        ProductRequestDTO productRequest = new ProductRequestDTO("Fabric cotton", "Skirt", 54.99, 1);
+        Product product = createProductDefault();
+                
+       
+        	when(productRepository.save(any(Product.class))).thenReturn(product);
+        
+        	ProductResponseDTO expectedResponse = createExpectedResponseDefault();
+            ProductResponseDTO response = productService.createProduct(productRequest);
+        	
+        	assertAll("response",
+        		() -> assertEquals(expectedResponse.getName(), response.getName()),
+        		() -> assertEquals(expectedResponse.getPrice(), response.getPrice(), 0.01),
+        		() -> assertEquals(expectedResponse.getDescription(), response.getDescription()),
+        		() -> assertEquals(1, response.getProductId())
+        );
+        	
+        verify(productRepository).save(any(Product.class));  
+    }
+    
+    @Test
+    public void findAllProductsSuccessTest() {
     	
     	Product product1 = new Product("Skirt", 54.99, "Fabric cotton" );
         product1.setProductId(1);
@@ -89,62 +144,6 @@ public class ProductServiceTest {
     		}
 		}
     }
-    
-	@Test
-    public void findProductByIdTest() {
-
-        Product product = createProductDefault();
-        ProductResponseDTO expectedResponse = createExpectedResponseDefault();
-    	
-    	when(productRepository.findById(any())).thenReturn(Optional.of(product));
-    	
-    	ProductResponseDTO request = productService.findProductById(1);
-    	
-    	assertAll("response",
-    			() -> assertEquals(expectedResponse.getName(), request.getName()),
-    			() -> assertEquals(expectedResponse.getPrice(), request.getPrice(), 0.01),
-    			() -> assertEquals(expectedResponse.getDescription(), request.getDescription()),
-    			() -> assertEquals(1, request.getProductId())
-    		);
-    	verify(productRepository).findById(1);
-    }
-
-	
-    @Test
-    public void findProductByIdErrorResourceNotFoundTest() throws ResourceNotFoundException{
-    	
-    	
-    	when(productRepository.findById(1)).thenThrow(ResourceNotFoundException.class);
-    	
-        assertThrows(ResourceNotFoundException.class, () -> productService.findProductById(1));
-        verify(productRepository).findById(1);
-    }
-
-    
-    
-    @Test
-    public void createProductTest(){
-    	
-        ProductRequestDTO productRequest = new ProductRequestDTO("Fabric cotton", "Skirt", 54.99, 1);
-        Product product = createProductDefault();
-                
-       
-        	when(productRepository.save(any(Product.class))).thenReturn(product);
-        
-        	ProductResponseDTO expectedResponse = createExpectedResponseDefault();
-            ProductResponseDTO response = productService.createProduct(productRequest);
-        	
-        	assertAll("response",
-        		() -> assertEquals(expectedResponse.getName(), response.getName()),
-        		() -> assertEquals(expectedResponse.getPrice(), response.getPrice(), 0.01),
-        		() -> assertEquals(expectedResponse.getDescription(), response.getDescription()),
-        		() -> assertEquals(1, response.getProductId())
-        );
-        	
-        verify(productRepository).save(any(Product.class));
-        
-    }
-
     
     @Test
     void testDeleteProduct() {

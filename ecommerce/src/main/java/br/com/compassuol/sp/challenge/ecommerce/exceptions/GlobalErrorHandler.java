@@ -37,7 +37,7 @@ public class GlobalErrorHandler {
 
     @ExceptionHandler(ProductPriceNotValidException.class)
     public ResponseEntity<ErrorMessage> handleProductPriceNotValidException(ProductPriceNotValidException ex){
-    	HttpStatus status = HttpStatus.NOT_ACCEPTABLE;
+    	HttpStatus status = HttpStatus.BAD_REQUEST;
         ErrorMessage error = createErrorResponse(status, ex);
         return ResponseEntity.status(status).body(error);
     }

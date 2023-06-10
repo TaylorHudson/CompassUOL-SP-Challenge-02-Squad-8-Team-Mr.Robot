@@ -6,7 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -15,7 +17,7 @@ public class PaymentRequestDTO {
 
     private PaymentMethod paymentMethod;
 
-    private LocalDateTime paymentDate;
+    private LocalDate paymentDate;
 
     private int orderId;
 

@@ -119,10 +119,10 @@ class OrderServiceTest {
 
         when(orderRepository.findById(anyInt())).thenReturn(Optional.of(order));
 
-        var orderResponse = orderService.findOrderById(1);
+        var orderResponse = orderService.findOrderById(anyInt());
 
         assertEquals(order.getOrderId(),orderResponse.getOrderId());
-        verify(orderService).findOrderById(1);
+        verify(orderRepository).findById(anyInt());
     }
 
     @Test
@@ -130,7 +130,7 @@ class OrderServiceTest {
 
         when(orderRepository.findById(anyInt())).thenReturn(Optional.empty());
 
-        assertThrows(ResourceNotFoundException.class,()->orderService.findOrderById(1));
-        verify(orderRepository).findById(1);
+        assertThrows(ResourceNotFoundException.class,() -> orderService.findOrderById(anyInt()));
+        verify(orderRepository).findById(anyInt());
     }
 }

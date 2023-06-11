@@ -4,36 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="31d7ec7e-e327-43b1-b99e-1f11abc7b6cb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/ecommerce/src/main/java/br/com/compassuol/sp/challenge/ecommerce/controllers/PaymentController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ecommerce/src/main/java/br/com/compassuol/sp/challenge/ecommerce/dto/request/PaymentRequestDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ecommerce/src/main/java/br/com/compassuol/sp/challenge/ecommerce/dto/response/PaymentResponseDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ecommerce/src/main/java/br/com/compassuol/sp/challenge/ecommerce/entity/Payment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ecommerce/src/main/java/br/com/compassuol/sp/challenge/ecommerce/entity/PaymentMethod.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ecommerce/src/main/java/br/com/compassuol/sp/challenge/ecommerce/repository/PaymentRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ecommerce/src/main/java/br/com/compassuol/sp/challenge/ecommerce/service/PaymentService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ecommerce/src/main/resources/db/migration/V1__create_customer_table.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ecommerce/src/main/resources/db/migration/V2__create_product_table.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ecommerce/src/main/resources/db/migration/V3__create_orders_table.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ecommerce/src/main/resources/db/migration/V4__create_payment_table.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ecommerce/src/main/resources/db/migration/V5__create_product_quantity_table.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ecommerce/src/main/resources/db/migration/V6__populate_customer_table.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ecommerce/src/main/resources/db/migration/V7__populate_product_table.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ecommerce/src/main/resources/db/migration/V8__populate_orders_table.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ecommerce/src/main/resources/db/migration/V9__populate_product_quantity_table.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ecommerce/src/test/java/br/com/compassuol/sp/challenge/ecommerce/service/PaymentServiceTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ecommerce/src/test/java/br/com/compassuol/sp/challenge/ecommerce/utils/CustomerUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecommerce/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecommerce/src/main/java/br/com/compassuol/sp/challenge/ecommerce/dto/request/ProductRequestDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce/src/main/java/br/com/compassuol/sp/challenge/ecommerce/dto/request/ProductRequestDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecommerce/src/main/java/br/com/compassuol/sp/challenge/ecommerce/entity/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce/src/main/java/br/com/compassuol/sp/challenge/ecommerce/entity/Order.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecommerce/src/main/java/br/com/compassuol/sp/challenge/ecommerce/exceptions/GlobalErrorHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce/src/main/java/br/com/compassuol/sp/challenge/ecommerce/exceptions/GlobalErrorHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecommerce/src/main/java/br/com/compassuol/sp/challenge/ecommerce/service/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce/src/main/java/br/com/compassuol/sp/challenge/ecommerce/service/OrderService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecommerce/src/main/resources/DBScripts/allInsideOne.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecommerce/src/main/resources/DBScripts/customerTable.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecommerce/src/main/resources/DBScripts/productTable.sql" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce/src/main/resources/DBScripts/productTable.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecommerce/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecommerce/src/test/java/br/com/compassuol/sp/challenge/ecommerce/service/CustomerServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce/src/test/java/br/com/compassuol/sp/challenge/ecommerce/service/CustomerServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecommerce/src/test/java/br/com/compassuol/sp/challenge/ecommerce/service/OrderServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce/src/test/java/br/com/compassuol/sp/challenge/ecommerce/service/OrderServiceTest.java" afterDir="false" />
+    <list default="true" id="31d7ec7e-e327-43b1-b99e-1f11abc7b6cb" name="Changes" comment="fix: changed RequestDTO for ResponseDTO">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_06_2023_08_58__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_06_2023_08_58__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -181,7 +154,7 @@
     <option name="version" value="3" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/challenge2$ecommerce_in_ecommerce.ic" NAME="ecommerce in ecommerce Coverage Results" MODIFIED="1686490274332" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/challenge2$ecommerce_in_ecommerce.ic" NAME="ecommerce in ecommerce Coverage Results" MODIFIED="1686496243293" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/challenge2$controllers_in_ecommerce.ic" NAME="controllers in ecommerce Coverage Results" MODIFIED="1686485905966" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

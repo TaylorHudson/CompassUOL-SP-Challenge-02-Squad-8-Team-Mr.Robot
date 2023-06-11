@@ -5,11 +5,9 @@ import br.com.compassuol.sp.challenge.ecommerce.dto.request.ProductQuantityReque
 import br.com.compassuol.sp.challenge.ecommerce.dto.response.OrderResponseDTO;
 import br.com.compassuol.sp.challenge.ecommerce.dto.response.ProductQuantityResponseDTO;
 import br.com.compassuol.sp.challenge.ecommerce.dto.response.ProductResponseDTO;
-import br.com.compassuol.sp.challenge.ecommerce.entity.Customer;
-import br.com.compassuol.sp.challenge.ecommerce.entity.Order;
-import br.com.compassuol.sp.challenge.ecommerce.entity.Product;
-import br.com.compassuol.sp.challenge.ecommerce.entity.ProductQuantity;
+import br.com.compassuol.sp.challenge.ecommerce.entity.*;
 import br.com.compassuol.sp.challenge.ecommerce.exceptions.EmptyProductException;
+import br.com.compassuol.sp.challenge.ecommerce.exceptions.ResourceNotFoundException;
 import br.com.compassuol.sp.challenge.ecommerce.repository.OrderRepository;
 import br.com.compassuol.sp.challenge.ecommerce.repository.ProductQuantityRepository;
 import lombok.AllArgsConstructor;
@@ -128,6 +126,18 @@ public class OrderService {
         });
 
         return responseDTO;
+    }
+
+    public Order findOrderById(int id){
+        return orderRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Did not find order with id - " + id));
+    }
+
+    public Order updateStatusOrder(int id, Status status) {
+        var order = orderRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("The id supplied must be from a order that is already created"));
+        order.setStatus(status);
+       return orderRepository.save(order);
     }
 
 }

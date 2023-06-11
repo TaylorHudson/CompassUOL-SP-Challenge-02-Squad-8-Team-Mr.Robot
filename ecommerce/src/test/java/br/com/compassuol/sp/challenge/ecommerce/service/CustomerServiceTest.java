@@ -6,6 +6,7 @@ import br.com.compassuol.sp.challenge.ecommerce.entity.Customer;
 import br.com.compassuol.sp.challenge.ecommerce.exceptions.InvalidCpfOrEmailException;
 import br.com.compassuol.sp.challenge.ecommerce.exceptions.ResourceNotFoundException;
 import br.com.compassuol.sp.challenge.ecommerce.repository.CustomerRepository;
+import br.com.compassuol.sp.challenge.ecommerce.utils.CustomerUtil;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -32,22 +33,13 @@ class CustomerServiceTest {
     @InjectMocks
     private CustomerService service;
 
-    private Customer createCustomerDefault() {
-        Customer customer = new Customer("John Doe", "12345678910", "john.doe@gmail.com", true);
-        customer.setCustomerId(1);
-        return customer;
-    }
-
-    private CustomerResponseDTO createExpectedResponseDefault() {
-        return new CustomerResponseDTO(1,"John Doe", "12345678910", "john.doe@gmail.com");
-    }
 
     @Test
     void findCustomerByIdSuccess() {
 
-        Customer customer = createCustomerDefault();
+        Customer customer = CustomerUtil.createCustomerDefault();
 
-        CustomerResponseDTO expectedResponse = createExpectedResponseDefault();
+        CustomerResponseDTO expectedResponse = CustomerUtil.createExpectedResponseDefault();
 
        when(repository.findById(any())).thenReturn(Optional.of(customer));
 
@@ -73,11 +65,11 @@ class CustomerServiceTest {
     @Test
     void createCustomerSuccess() {
         CustomerRequestDTO customerRequest = new CustomerRequestDTO();
-        Customer customer = createCustomerDefault();
+        Customer customer = CustomerUtil.createCustomerDefault();
 
         when(repository.save(any(Customer.class))).thenReturn(customer);
 
-        CustomerResponseDTO expectedResponse = createExpectedResponseDefault();
+        CustomerResponseDTO expectedResponse = CustomerUtil.createExpectedResponseDefault();
         CustomerResponseDTO response = service.createCustomer(customerRequest);
 
         assertAll("response",
@@ -93,7 +85,7 @@ class CustomerServiceTest {
     void createCustomerInvalidCpfOrEmailException() {
         CustomerRequestDTO customerRequest = new CustomerRequestDTO();
 
-        Customer customer = createCustomerDefault();
+        Customer customer = CustomerUtil.createCustomerDefault();
 
         when(repository.findByCpfOrEmail(any(), any())).thenReturn(Optional.of(customer));
 
@@ -106,9 +98,9 @@ class CustomerServiceTest {
         CustomerRequestDTO customerRequest =
                 new CustomerRequestDTO("John Doe","12345678910","john.doe@gmail.com");
 
-        Customer customer = createCustomerDefault();
+        Customer customer = CustomerUtil.createCustomerDefault();
 
-        CustomerResponseDTO expectedResponse = createExpectedResponseDefault();
+        CustomerResponseDTO expectedResponse = CustomerUtil.createExpectedResponseDefault();
 
         when(repository.findById(anyInt())).thenReturn(Optional.of(customer));
         when(repository.save(any(Customer.class))).thenReturn(customer);

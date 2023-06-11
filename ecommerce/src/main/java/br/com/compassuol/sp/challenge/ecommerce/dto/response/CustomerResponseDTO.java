@@ -8,13 +8,14 @@ import lombok.Setter;
 @Getter @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProductResponseDTO {
+public class CustomerResponseDTO {
 
-	private int productId;
+    private int customerId;
 
-	private String name;
+    private String name;
 
-	private double price;
+    private String cpf;
 
-	private String description;
+    private String email;
+
 }

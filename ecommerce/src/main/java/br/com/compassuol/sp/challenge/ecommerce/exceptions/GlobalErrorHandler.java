@@ -37,7 +37,7 @@ public class GlobalErrorHandler {
 
     @ExceptionHandler(ProductPriceNotValidException.class)
     public ResponseEntity<ErrorMessage> handleProductPriceNotValidException(ProductPriceNotValidException ex){
-    	HttpStatus status = HttpStatus.NOT_ACCEPTABLE;
+    	HttpStatus status = HttpStatus.BAD_REQUEST;
         ErrorMessage error = createErrorResponse(status, ex);
         return ResponseEntity.status(status).body(error);
     }
@@ -52,6 +52,13 @@ public class GlobalErrorHandler {
                 .forEach(error -> errors.add(createErrorResponse(status, error.getDefaultMessage())));
 
         return ResponseEntity.status(status).body(errors);
+    }
+
+    @ExceptionHandler(EmptyProductException.class)
+    public ResponseEntity<ErrorMessage> handleMethodEmptyProductException(EmptyProductException ex) {
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        ErrorMessage error = createErrorResponse(status, ex);
+        return ResponseEntity.status(status).body(error);
     }
 
     private ErrorMessage createErrorResponse(HttpStatus status, Exception ex) {
@@ -71,5 +78,7 @@ public class GlobalErrorHandler {
                 .timestamp(System.currentTimeMillis())
                 .build();
     }
+
+
 
 }

@@ -5,16 +5,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter @Setter
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProductResponseDTO {
+public class ProductQuantityResponseDTO {
 
-	private int productId;
+    private int productId;
 
-	private String name;
+    private int quantity;
 
-	private double price;
-
-	private String description;
 }

@@ -56,7 +56,7 @@ public class GlobalErrorHandler {
     }
 
     @ExceptionHandler(EmptyProductException.class)
-    public ResponseEntity<ErrorMessage> handleMethodEmptyProductException(EmptyProductException ex) {
+    public ResponseEntity<ErrorMessage> handleEmptyProductException(EmptyProductException ex) {
         HttpStatus status = HttpStatus.BAD_REQUEST;
         ErrorMessage error = createErrorResponse(status, ex);
         return ResponseEntity.status(status).body(error);

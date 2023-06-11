@@ -41,6 +41,7 @@ public class Order {
         this.products = products;
     }
 
+
     public Order(int orderId, LocalDate date, Status status, Customer customer, List<ProductQuantity> products) {
         this.orderId = orderId;
         this.date = date;

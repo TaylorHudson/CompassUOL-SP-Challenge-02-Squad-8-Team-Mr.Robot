@@ -17,21 +17,11 @@ public class PaymentService {
 
     private final OrderService orderService;
 
-    private final CustomerService customerService;
-
     private final ModelMapper mapper;
 
     public PaymentResponseDTO createPayment(PaymentRequestDTO paymentRequestDTO){
 
         var order = orderService.findOrderById(paymentRequestDTO.getOrderId());
-        var customerResponseDTO = customerService.findCustomerById(order.getCustomer().getCustomerId());
-
-        var customer = new Customer();
-        customer.setCustomerId(customerResponseDTO.getCustomerId());
-        customer.setName(customerResponseDTO.getName());
-        customer.setCpf(customerResponseDTO.getCpf());
-        customer.setEmail(customerResponseDTO.getEmail());
-        customer.setActive(true);
 
         Payment newPayment  = new Payment();
         newPayment.setPaymentDate(paymentRequestDTO.getPaymentDate());

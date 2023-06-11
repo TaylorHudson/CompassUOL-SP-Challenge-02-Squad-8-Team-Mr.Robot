@@ -13,16 +13,12 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ProductRequestDTO {
 
+    private String description;
 
     private String name;
 
-
-    private String description;
-	
     private double price;
 
-    public int ProductId;
+    public int productId;
 
-    public ProductRequestDTO(String productName, double v, String productDescription) {
-    }
 }

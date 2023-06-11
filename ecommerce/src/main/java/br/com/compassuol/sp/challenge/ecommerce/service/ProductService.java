@@ -58,6 +58,8 @@ public class ProductService {
 	    	
 	    	return productsListDTO;
 	    }
+	
+	
 	public ProductResponseDTO updateProduct(int id, ProductRequestDTO request) {
 		Product product = productRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("The id supplied must be from a product that is already created"));
@@ -68,6 +70,7 @@ public class ProductService {
 		Product updatedProduct = productRepository.save(product);
 		return mapper.map(updatedProduct, ProductResponseDTO.class);
 	}
+	
 
 	public void deleteProduct(int id) {
 		Product product = productRepository.findById(id)

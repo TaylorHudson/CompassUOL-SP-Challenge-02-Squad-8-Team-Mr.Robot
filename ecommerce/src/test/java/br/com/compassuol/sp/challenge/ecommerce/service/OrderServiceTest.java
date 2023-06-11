@@ -10,6 +10,7 @@ import br.com.compassuol.sp.challenge.ecommerce.entity.Order;
 import br.com.compassuol.sp.challenge.ecommerce.entity.ProductQuantity;
 import br.com.compassuol.sp.challenge.ecommerce.entity.Status;
 import br.com.compassuol.sp.challenge.ecommerce.exceptions.EmptyProductException;
+import br.com.compassuol.sp.challenge.ecommerce.exceptions.ResourceNotFoundException;
 import br.com.compassuol.sp.challenge.ecommerce.repository.OrderRepository;
 import br.com.compassuol.sp.challenge.ecommerce.repository.ProductQuantityRepository;
 import br.com.compassuol.sp.challenge.ecommerce.utils.OrderUtil;
@@ -24,6 +25,7 @@ import org.modelmapper.ModelMapper;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -52,8 +54,8 @@ class OrderServiceTest {
     @Test
     void createOrderSuccess() {
 
-        Order order = OrderUtil.createOrderDefault();
-        OrderRequestDTO orderRequestDTO = OrderUtil.createOrderRequest();
+        var order = OrderUtil.createOrderDefault();
+        var orderRequestDTO = OrderUtil.createOrderRequest();
 
         var productQuantity = new ProductQuantity();
 
@@ -72,7 +74,7 @@ class OrderServiceTest {
     @Test
     void createOrderEmptyProductException() {
 
-        OrderRequestDTO orderRequestDTO = new OrderRequestDTO(1, new ArrayList<ProductQuantityRequestDTO>(), LocalDate.now(),Status.CREATED);
+       var orderRequestDTO = new OrderRequestDTO(1, new ArrayList<ProductQuantityRequestDTO>(), LocalDate.now(),Status.CREATED);
 
         when(customerService.findCustomerById(anyInt())).thenReturn(new CustomerResponseDTO());
 
@@ -82,7 +84,7 @@ class OrderServiceTest {
 
     @Test
     void findAllOrdersSuccess() {
-        Order order = new Order(1, LocalDate.now(), Status.CREATED,new Customer(),new ArrayList<ProductQuantity>());
+        var order = new Order(1, LocalDate.now(), Status.CREATED,new Customer(),new ArrayList<ProductQuantity>());
         List<Order> orderList= new ArrayList<>();
         orderList.add(order);
 
@@ -111,4 +113,48 @@ class OrderServiceTest {
         assertEquals(1, ordersResponse.get(0).getCustomerId());
     }
 
+    @Test
+    void findOrderByIdSuccess(){
+        var order = OrderUtil.createOrderDefault();
+
+        when(orderRepository.findById(anyInt())).thenReturn(Optional.of(order));
+
+        var orderResponse = orderService.findOrderById(anyInt());
+
+        assertEquals(order.getOrderId(),orderResponse.getOrderId());
+        verify(orderRepository).findById(anyInt());
+    }
+
+    @Test
+    void findOrderByIdResourceNotFoundException(){
+
+        when(orderRepository.findById(anyInt())).thenReturn(Optional.empty());
+
+        assertThrows(ResourceNotFoundException.class,() -> orderService.findOrderById(anyInt()));
+        verify(orderRepository).findById(anyInt());
+    }
+
+
+    @Test
+
+    void updateStatusOrderSuccess(){
+
+        var order = OrderUtil.createOrderDefault();
+
+        when(orderRepository.findById(anyInt())).thenReturn(Optional.of(order));
+
+        orderService.updateStatusOrder(anyInt(),Status.CONFIRMED);
+
+        assertEquals(Status.CONFIRMED,order.getStatus());
+        verify(orderRepository).findById(anyInt());
+    }
+
+    @Test
+    void updateStatusOrderResourceNotFoundException(){
+
+        when(orderRepository.findById(anyInt())).thenReturn(Optional.empty());
+
+        assertThrows(ResourceNotFoundException.class, () -> orderService.updateStatusOrder(anyInt(),Status.CONFIRMED));
+        verify(orderRepository).findById(anyInt());
+    }
 }

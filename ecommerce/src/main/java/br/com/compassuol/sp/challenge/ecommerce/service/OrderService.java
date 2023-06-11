@@ -129,17 +129,15 @@ public class OrderService {
     }
 
     public Order findOrderById(int id){
-        var order = orderRepository.findById(id)
+        return orderRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Did not find order with id - " + id));
-
-        return order;
     }
 
-    public void updateStatusOrder(int id, Status status) {
+    public Order updateStatusOrder(int id, Status status) {
         var order = orderRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("The id supplied must be from a order that is already created"));
         order.setStatus(status);
-        orderRepository.save(order);
+       return orderRepository.save(order);
     }
 
 }

@@ -24,8 +24,7 @@ public class PaymentService {
     public PaymentResponseDTO createPayment(PaymentRequestDTO paymentRequestDTO){
 
         var order = orderService.findOrderById(paymentRequestDTO.getOrderId());
-        var customerResponseDTO = customerService.findCustomerById(order.getOrderId());
-
+        var customerResponseDTO = customerService.findCustomerById(order.getCustomer().getCustomerId());
 
         var customer = new Customer();
         customer.setCustomerId(customerResponseDTO.getCustomerId());
@@ -43,9 +42,6 @@ public class PaymentService {
 
         orderService.updateStatusOrder(order.getOrderId(),Status.CONFIRMED);
 
-
-
         return new PaymentResponseDTO(newPayment.getPaymentId(), newPayment.getPaymentMethod(),newPayment.getPaymentDate(),order.getOrderId());
-
     }
 }

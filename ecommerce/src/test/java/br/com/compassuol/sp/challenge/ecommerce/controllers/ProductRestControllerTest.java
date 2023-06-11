@@ -35,7 +35,7 @@ import br.com.compassuol.sp.challenge.ecommerce.exceptions.ResourceNotFoundExcep
 import br.com.compassuol.sp.challenge.ecommerce.service.ProductService;
 
 
-@WebMvcTest
+@WebMvcTest(controllers = ProductRestController.class)
 public class ProductRestControllerTest {
 	
 
@@ -112,6 +112,7 @@ public class ProductRestControllerTest {
 
         assertEquals(HttpStatus.CREATED.value(), response.getStatus());
     }
+    
     
     @Test
     void createProductPriceNotValidException() throws Exception {

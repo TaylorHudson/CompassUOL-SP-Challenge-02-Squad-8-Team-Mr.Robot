@@ -128,19 +128,17 @@ public class OrderService {
         return responseDTO;
     }
 
-    public OrderResponseDTO findOrderById(int id){
+    public Order findOrderById(int id){
         var order = orderRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Did not find order with id - " + id));
 
-        return mapper.map(order,OrderResponseDTO.class);
-
+        return order;
     }
 
     public void updateStatusOrder(int id, Status status) {
         var order = orderRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("The id supplied must be from a order that is already created"));
         order.setStatus(status);
-
         orderRepository.save(order);
     }
 

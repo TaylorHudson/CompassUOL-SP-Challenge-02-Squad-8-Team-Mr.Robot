@@ -10,6 +10,7 @@ import br.com.compassuol.sp.challenge.ecommerce.entity.Order;
 import br.com.compassuol.sp.challenge.ecommerce.entity.ProductQuantity;
 import br.com.compassuol.sp.challenge.ecommerce.entity.Status;
 import br.com.compassuol.sp.challenge.ecommerce.exceptions.EmptyProductException;
+import br.com.compassuol.sp.challenge.ecommerce.exceptions.ResourceNotFoundException;
 import br.com.compassuol.sp.challenge.ecommerce.repository.OrderRepository;
 import br.com.compassuol.sp.challenge.ecommerce.repository.ProductQuantityRepository;
 import br.com.compassuol.sp.challenge.ecommerce.utils.OrderUtil;
@@ -24,6 +25,7 @@ import org.modelmapper.ModelMapper;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -111,4 +113,24 @@ class OrderServiceTest {
         assertEquals(1, ordersResponse.get(0).getCustomerId());
     }
 
+    @Test
+    void findOrderByIdSuccess(){
+        Order order = OrderUtil.createOrderDefault();
+
+        when(orderRepository.findById(anyInt())).thenReturn(Optional.of(order));
+
+        var orderResponse = orderService.findOrderById(1);
+
+        assertEquals(order.getOrderId(),orderResponse.getOrderId());
+        verify(orderService).findOrderById(1);
+    }
+
+    @Test
+    void findOrderByIdError(){
+
+        when(orderRepository.findById(anyInt())).thenReturn(Optional.empty());
+
+        assertThrows(ResourceNotFoundException.class,()->orderService.findOrderById(1));
+        verify(orderRepository).findById(1);
+    }
 }

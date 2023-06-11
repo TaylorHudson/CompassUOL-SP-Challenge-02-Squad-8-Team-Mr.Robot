@@ -5,31 +5,39 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="31d7ec7e-e327-43b1-b99e-1f11abc7b6cb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/aws.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/CompassUOL-SP-Challenge-02-Squad-8-Team-Mr.Robot.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/challenge2.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/82a24659-1596-45b7-95c2-ec2a91fc9873.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/82a24659-1596-45b7-95c2-ec2a91fc9873/storage_v2/_src_/schema/information_schema.FNRwLQ.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/82a24659-1596-45b7-95c2-ec2a91fc9873/storage_v2/_src_/schema/mysql.osA4Bg.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/82a24659-1596-45b7-95c2-ec2a91fc9873/storage_v2/_src_/schema/performance_schema.kIw0nw.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/82a24659-1596-45b7-95c2-ec2a91fc9873/storage_v2/_src_/schema/sys.zb4BAA.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/http-client.cookies" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/ecommerce/src/main/java/br/com/compassuol/sp/challenge/ecommerce/controllers/CustomerRestController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ecommerce/src/main/java/br/com/compassuol/sp/challenge/ecommerce/controllers/OrderRestController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ecommerce/src/main/java/br/com/compassuol/sp/challenge/ecommerce/dto/request/CustomerRequestDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ecommerce/src/main/java/br/com/compassuol/sp/challenge/ecommerce/dto/request/OrderRequestDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ecommerce/src/main/java/br/com/compassuol/sp/challenge/ecommerce/dto/request/ProductDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ecommerce/src/main/java/br/com/compassuol/sp/challenge/ecommerce/dto/request/ProductQuantityRequestDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ecommerce/src/main/java/br/com/compassuol/sp/challenge/ecommerce/dto/response/CustomerResponseDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ecommerce/src/main/java/br/com/compassuol/sp/challenge/ecommerce/dto/response/OrderResponseDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ecommerce/src/main/java/br/com/compassuol/sp/challenge/ecommerce/dto/response/ProductQuantityResponseDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ecommerce/src/main/java/br/com/compassuol/sp/challenge/ecommerce/entity/Customer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ecommerce/src/main/java/br/com/compassuol/sp/challenge/ecommerce/entity/Order.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ecommerce/src/main/java/br/com/compassuol/sp/challenge/ecommerce/entity/ProductQuantity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ecommerce/src/main/java/br/com/compassuol/sp/challenge/ecommerce/entity/Status.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ecommerce/src/main/java/br/com/compassuol/sp/challenge/ecommerce/exceptions/EmptyProductException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ecommerce/src/main/java/br/com/compassuol/sp/challenge/ecommerce/repository/CustomerRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ecommerce/src/main/java/br/com/compassuol/sp/challenge/ecommerce/repository/OrderRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ecommerce/src/main/java/br/com/compassuol/sp/challenge/ecommerce/repository/ProductQuantityRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ecommerce/src/main/java/br/com/compassuol/sp/challenge/ecommerce/service/CustomerService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ecommerce/src/main/java/br/com/compassuol/sp/challenge/ecommerce/service/OrderService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ecommerce/src/main/resources/DBScripts/allInsideOne.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ecommerce/src/main/resources/DBScripts/customerTable.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ecommerce/src/test/java/br/com/compassuol/sp/challenge/ecommerce/controllers/CustomerRestControllerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ecommerce/src/test/java/br/com/compassuol/sp/challenge/ecommerce/service/CustomerServiceTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ecommerce/src/test/java/br/com/compassuol/sp/challenge/ecommerce/service/OrderServiceTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ecommerce/src/test/java/br/com/compassuol/sp/challenge/ecommerce/utils/OrderUtil.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecommerce/src/main/java/br/com/compassuol/sp/challenge/ecommerce/dto/response/ProductResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce/src/main/java/br/com/compassuol/sp/challenge/ecommerce/dto/response/ProductResponseDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecommerce/src/main/java/br/com/compassuol/sp/challenge/ecommerce/entity/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce/src/main/java/br/com/compassuol/sp/challenge/ecommerce/entity/Product.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ecommerce/src/main/java/br/com/compassuol/sp/challenge/ecommerce/exceptions/GlobalErrorHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce/src/main/java/br/com/compassuol/sp/challenge/ecommerce/exceptions/GlobalErrorHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecommerce/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecommerce/src/main/java/br/com/compassuol/sp/challenge/ecommerce/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce/src/main/java/br/com/compassuol/sp/challenge/ecommerce/service/ProductService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecommerce/src/test/java/br/com/compassuol/sp/challenge/ecommerce/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce/src/test/java/br/com/compassuol/sp/challenge/ecommerce/utils/Utils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecommerce/src/test/java/br/com/compassuol/sp/challenge/ecommerce/controllers/ProductRestControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce/src/test/java/br/com/compassuol/sp/challenge/ecommerce/controllers/ProductRestControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecommerce/src/test/java/br/com/compassuol/sp/challenge/ecommerce/service/ProductServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce/src/test/java/br/com/compassuol/sp/challenge/ecommerce/service/ProductServiceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,6 +45,11 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="dev-task4" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MavenImportPreferences">
@@ -47,41 +60,30 @@
     </option>
   </component>
   <component name="ProjectId" id="2R1UEZqetFdLKolO81miOVMGDBl" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/Vitor/OneDrive/Área de Trabalho/Teste",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "spring.configuration.checksum": "db96ff26706a1a3d595ecb67266c2d94",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Vitor/OneDrive/Área de Trabalho/Teste&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;db96ff26706a1a3d595ecb67266c2d94&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
-  <component name="RunManager" selected="JUnit.ProductRestControllerTest">
-    <configuration name="ProductRestControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ecommerce" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="br.com.compassuol.sp.challenge.ecommerce.controllers.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="br.com.compassuol.sp.challenge.ecommerce.controllers" />
-      <option name="MAIN_CLASS_NAME" value="br.com.compassuol.sp.challenge.ecommerce.controllers.ProductRestControllerTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+}</component>
+  <component name="RunManager" selected="JUnit.ProductRestControllerTest.testUpdateProduct_ProductNotFoundException">
     <configuration name="ProductRestControllerTest.deleteProduct_Success" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ecommerce" />
       <extension name="coverage">
@@ -93,6 +95,22 @@
       <option name="PACKAGE_NAME" value="br.com.compassuol.sp.challenge.ecommerce.controllers" />
       <option name="MAIN_CLASS_NAME" value="br.com.compassuol.sp.challenge.ecommerce.controllers.ProductRestControllerTest" />
       <option name="METHOD_NAME" value="deleteProduct_Success" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ProductRestControllerTest.testUpdateProduct_ProductNotFoundException" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ecommerce" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="br.com.compassuol.sp.challenge.ecommerce.controllers.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="br.com.compassuol.sp.challenge.ecommerce.controllers" />
+      <option name="MAIN_CLASS_NAME" value="br.com.compassuol.sp.challenge.ecommerce.controllers.ProductRestControllerTest" />
+      <option name="METHOD_NAME" value="testUpdateProduct_ProductNotFoundException" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -113,6 +131,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="controllers in ecommerce" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ecommerce" />
+      <option name="TEST_OBJECT" value="directory" />
+      <dir value="$PROJECT_DIR$/ecommerce/src/test/java/br/com/compassuol/sp/challenge/ecommerce/controllers" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ecommerce in ecommerce" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ecommerce" />
+      <option name="TEST_OBJECT" value="directory" />
+      <dir value="$PROJECT_DIR$/ecommerce/src/test/java/br/com/compassuol/sp/challenge/ecommerce" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="EcommerceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="ecommerce" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="br.com.compassuol.sp.challenge.ecommerce.EcommerceApplication" />
@@ -122,8 +156,10 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.ProductRestControllerTest" />
+        <item itemvalue="JUnit.ProductRestControllerTest.testUpdateProduct_ProductNotFoundException" />
+        <item itemvalue="JUnit.ecommerce in ecommerce" />
         <item itemvalue="JUnit.ProductRestControllerTest.deleteProduct_Success" />
+        <item itemvalue="JUnit.controllers in ecommerce" />
         <item itemvalue="JUnit.ProductServiceTest" />
       </list>
     </recent_temporary>
@@ -138,10 +174,17 @@
       <updated>1686416973243</updated>
       <workItem from="1686416976767" duration="200000" />
       <workItem from="1686423892236" duration="1282000" />
+      <workItem from="1686488904067" duration="193000" />
+      <workItem from="1686489190054" duration="1572000" />
+      <workItem from="1686493985280" duration="1758000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/challenge2$ecommerce_in_ecommerce.ic" NAME="ecommerce in ecommerce Coverage Results" MODIFIED="1686490274332" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/challenge2$controllers_in_ecommerce.ic" NAME="controllers in ecommerce Coverage Results" MODIFIED="1686485905966" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

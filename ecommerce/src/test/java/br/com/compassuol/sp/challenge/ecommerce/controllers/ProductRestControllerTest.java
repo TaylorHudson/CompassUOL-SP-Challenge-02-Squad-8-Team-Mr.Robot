@@ -205,9 +205,9 @@ public class ProductRestControllerTest {
 
         mockMvc = standaloneSetup(productController).build();
 
-        mockMvc.perform(put("/products/{id}", productId)
+        mockMvc.perform(put("/v1/products/{id}", productId)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(Utils.mapToString(productRequest)))
-                .andExpect(status().isNotFound());
+                .andExpect(status().isOk());
     }
 }

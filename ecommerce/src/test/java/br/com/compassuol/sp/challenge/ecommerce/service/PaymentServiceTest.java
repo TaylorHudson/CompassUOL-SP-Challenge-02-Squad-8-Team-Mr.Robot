@@ -19,6 +19,7 @@ import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 
@@ -36,22 +37,21 @@ class PaymentServiceTest {
 
     @Test
     void createPayment() {
-
         var paymentRequestDTO = new PaymentRequestDTO(PaymentMethod.CREDIT_CARD, LocalDate.now(),1);
         var order = OrderUtil.createOrderDefault();
         var newPayment = new Payment(1,paymentRequestDTO.getPaymentMethod(),paymentRequestDTO.getPaymentDate(),order);
 
         when(orderService.findOrderById(anyInt())).thenReturn(order);
         when(paymentRepository.save(any(Payment.class))).thenReturn(newPayment);
-        when(orderService.updateStatusOrder(1,Status.CONFIRMED)).thenReturn(order);
 
         var response = service.createPayment(paymentRequestDTO);
 
         assertEquals(paymentRequestDTO.getPaymentMethod(), response.getPaymentMethod());
-        assertEquals(Status.CONFIRMED,order.getStatus());
-
+        assertEquals(paymentRequestDTO.getPaymentDate(), response.getPaymentDate());
+        assertEquals(order.getOrderId(), response.getOrderId());
+        verify(orderService).findOrderById(response.getOrderId());
+        verify(paymentRepository).save(any(Payment.class));
+        verify(orderService).updateStatusOrder(response.getOrderId(), Status.CONFIRMED);
     }
-
-
 
 }

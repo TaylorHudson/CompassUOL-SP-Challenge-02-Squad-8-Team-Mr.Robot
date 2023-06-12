@@ -19,6 +19,4 @@ public class ProductRequestDTO {
 
     private double price;
 
-    public int productId;
-
 }

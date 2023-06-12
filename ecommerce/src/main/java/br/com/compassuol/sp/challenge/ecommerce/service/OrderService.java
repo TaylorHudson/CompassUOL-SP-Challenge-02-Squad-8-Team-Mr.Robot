@@ -10,6 +10,8 @@ import br.com.compassuol.sp.challenge.ecommerce.exceptions.EmptyProductException
 import br.com.compassuol.sp.challenge.ecommerce.exceptions.ResourceNotFoundException;
 import br.com.compassuol.sp.challenge.ecommerce.repository.OrderRepository;
 import br.com.compassuol.sp.challenge.ecommerce.repository.ProductQuantityRepository;
+import br.com.compassuol.sp.challenge.ecommerce.util.OrderUtil;
+import br.com.compassuol.sp.challenge.ecommerce.util.ProductQuantityUtil;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -25,9 +27,9 @@ public class OrderService {
 
     private final CustomerService customerService;
 
-    private final ProductService productService;
-
     private final ProductQuantityRepository productQuantityRepository;
+
+    private final ProductService productService;
 
     private final ModelMapper mapper;
 
@@ -36,14 +38,14 @@ public class OrderService {
         var customerResponseDTO = customerService.findCustomerById(request.getCustomerId());
         var customer = mapper.map(customerResponseDTO, Customer.class);
 
-        var productsQuantityDTO = request.getProducts();
+        var listRequestDTO = request.getProducts();
 
-        if (productsQuantityDTO.isEmpty()) {
+        if (listRequestDTO.isEmpty()) {
             throw new EmptyProductException("The Products cannot be empty!");
         }
 
-        List<ProductQuantity> products = toProductQuantity(productsQuantityDTO);
-        List<ProductQuantityResponseDTO> responseDTO = toProductQuantityResponse(productsQuantityDTO);
+        List<ProductQuantity> products = toProductQuantity(listRequestDTO);
+        List<ProductQuantityResponseDTO> responseDTO = ProductQuantityUtil.requestToResponseDTO(listRequestDTO);
 
         Order order = new Order(request.getDate(), request.getStatus(), customer, products);
         Order saved = orderRepository.save(order);
@@ -62,24 +64,24 @@ public class OrderService {
         var customer = mapper.map(customerResponse, Customer.class);
 
         List<Order> allByCustomer = orderRepository.findAllByCustomer(customer);
-        return toOrderResponseDTO(allByCustomer);
+        return OrderUtil.toOrderResponseDTO(allByCustomer);
     }
 
     public List<OrderResponseDTO> findAllOrders() {
         List<Order> orderList = orderRepository.findAll();
-        return toOrderResponseDTO(orderList);
+        return OrderUtil.toOrderResponseDTO(orderList);
     }
 
-    private List<ProductQuantityResponseDTO> toProductQuantityResponse(List<ProductQuantityRequestDTO> request) {
-        List<ProductQuantityResponseDTO> responseDTO = new ArrayList<>();
-        request.forEach(p -> {
-            var productQuantityResponse = new ProductQuantityResponseDTO();
-            productQuantityResponse.setProductId(p.getProductId());
-            productQuantityResponse.setQuantity(p.getQuantity());
+    public Order findOrderById(int id){
+        return orderRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Did not find order with id - " + id));
+    }
 
-            responseDTO.add(productQuantityResponse);
-        });
-        return responseDTO;
+    public Order updateStatusOrder(int id, Status status) {
+        var order = orderRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("The id supplied must be from a order that is already created"));
+        order.setStatus(status);
+       return orderRepository.save(order);
     }
 
     private List<ProductQuantity> toProductQuantity(List<ProductQuantityRequestDTO> request) {
@@ -97,47 +99,6 @@ public class OrderService {
         });
 
         return products;
-    }
-
-    private List<OrderResponseDTO> toOrderResponseDTO(List<Order> orders) {
-        List<OrderResponseDTO> response = new ArrayList<>();
-        orders.forEach(order -> {
-            var dto = new OrderResponseDTO();
-            dto.setOrderId(order.getOrderId());
-            dto.setDate(order.getDate());
-            dto.setCustomerId(order.getCustomer().getCustomerId());
-            dto.setStatus(order.getStatus());
-            dto.setProducts(toResponseDTO(order.getProducts()));
-
-            response.add(dto);
-        });
-        return response;
-    }
-
-    private List<ProductQuantityResponseDTO> toResponseDTO(List<ProductQuantity> productQuantities) {
-        List<ProductQuantityResponseDTO> responseDTO = new ArrayList<>();
-
-        productQuantities.forEach(productQ -> {
-            var product = new ProductQuantityResponseDTO();
-            product.setProductId(productQ.getProduct().getProductId());
-            product.setQuantity(productQ.getQuantity());
-
-            responseDTO.add(product);
-        });
-
-        return responseDTO;
-    }
-
-    public Order findOrderById(int id){
-        return orderRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Did not find order with id - " + id));
-    }
-
-    public Order updateStatusOrder(int id, Status status) {
-        var order = orderRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("The id supplied must be from a order that is already created"));
-        order.setStatus(status);
-       return orderRepository.save(order);
     }
 
 }

@@ -3,6 +3,7 @@ package br.com.compassuol.sp.challenge.ecommerce.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.compassuol.sp.challenge.ecommerce.exceptions.ProductExitsInAOrderException;
 import br.com.compassuol.sp.challenge.ecommerce.exceptions.ProductPriceNotValidException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +39,7 @@ public class ProductService {
 
 		Product createdProduct = mapper.map(product, Product.class);
 
-		if(createdProduct.getPrice() == 0 || createdProduct.getPrice() < 0) {
+		if(createdProduct.getPrice() <= 0) {
 			throw new ProductPriceNotValidException("Product price not valid");
 		}
 
@@ -66,6 +67,7 @@ public class ProductService {
 
 		product.setName(request.getName());
 		product.setPrice(request.getPrice());
+		product.setDescription(request.getDescription());
 
 		Product updatedProduct = productRepository.save(product);
 		return mapper.map(updatedProduct, ProductResponseDTO.class);
@@ -76,7 +78,11 @@ public class ProductService {
 		Product product = productRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("The product corresponding to this ID does not exist"));
 
-		productRepository.delete(product);
+		try {
+			productRepository.delete(product);
+		}catch (Exception e){
+			throw new ProductExitsInAOrderException("The product is related to a order and cant be deleted.")	;
+		}
 	}
 
 

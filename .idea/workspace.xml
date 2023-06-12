@@ -13,6 +13,13 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
@@ -52,8 +59,8 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager" selected="JUnit.ecommerce in ecommerce">
-    <configuration name="ProductRestControllerTest.deleteProduct_Success" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.java in ecommerce">
+    <configuration name="PaymentRestControllerTest.createPaymentSuccess" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ecommerce" />
       <extension name="coverage">
         <pattern>
@@ -62,24 +69,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="br.com.compassuol.sp.challenge.ecommerce.controllers" />
-      <option name="MAIN_CLASS_NAME" value="br.com.compassuol.sp.challenge.ecommerce.controllers.ProductRestControllerTest" />
-      <option name="METHOD_NAME" value="deleteProduct_Success" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ProductRestControllerTest.testUpdateProduct_ProductNotFoundException" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ecommerce" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="br.com.compassuol.sp.challenge.ecommerce.controllers.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="br.com.compassuol.sp.challenge.ecommerce.controllers" />
-      <option name="MAIN_CLASS_NAME" value="br.com.compassuol.sp.challenge.ecommerce.controllers.ProductRestControllerTest" />
-      <option name="METHOD_NAME" value="testUpdateProduct_ProductNotFoundException" />
+      <option name="MAIN_CLASS_NAME" value="br.com.compassuol.sp.challenge.ecommerce.controllers.PaymentRestControllerTest" />
+      <option name="METHOD_NAME" value="createPaymentSuccess" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -101,10 +92,16 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="controllers in ecommerce" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="br.com.compassuol.sp.challenge.ecommerce in ecommerce" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ecommerce" />
-      <option name="TEST_OBJECT" value="directory" />
-      <dir value="$PROJECT_DIR$/ecommerce/src/test/java/br/com/compassuol/sp/challenge/ecommerce/controllers" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="br.com.compassuol.sp.challenge.ecommerce.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="br.com.compassuol.sp.challenge.ecommerce" />
+      <option name="TEST_OBJECT" value="package" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -113,6 +110,14 @@
       <module name="ecommerce" />
       <option name="TEST_OBJECT" value="directory" />
       <dir value="$PROJECT_DIR$/ecommerce/src/test/java/br/com/compassuol/sp/challenge/ecommerce" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="java in ecommerce" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ecommerce" />
+      <option name="TEST_OBJECT" value="directory" />
+      <dir value="$PROJECT_DIR$/ecommerce/src/test/java" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -126,11 +131,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.java in ecommerce" />
+        <item itemvalue="JUnit.br.com.compassuol.sp.challenge.ecommerce in ecommerce" />
+        <item itemvalue="JUnit.PaymentRestControllerTest.createPaymentSuccess" />
         <item itemvalue="JUnit.ecommerce in ecommerce" />
         <item itemvalue="JUnit.ProductServiceTest.createProductSuccessTest" />
-        <item itemvalue="JUnit.ProductRestControllerTest.testUpdateProduct_ProductNotFoundException" />
-        <item itemvalue="JUnit.ProductRestControllerTest.deleteProduct_Success" />
-        <item itemvalue="JUnit.controllers in ecommerce" />
       </list>
     </recent_temporary>
   </component>
@@ -147,6 +152,7 @@
       <workItem from="1686488904067" duration="193000" />
       <workItem from="1686489190054" duration="1572000" />
       <workItem from="1686493985280" duration="2095000" />
+      <workItem from="1686572211159" duration="4937000" />
     </task>
     <servers />
   </component>
@@ -154,6 +160,9 @@
     <option name="version" value="3" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/challenge$br_com_compassuol_sp_challenge_ecommerce_in_ecommerce.ic" NAME="br.com.compassuol.sp.challenge.ecommerce in ecommerce Coverage Results" MODIFIED="1686572355921" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>br.com.compassuol.sp.challenge.ecommerce.*</FILTER>
+    </SUITE>
     <SUITE FILE_PATH="coverage/challenge2$ecommerce_in_ecommerce.ic" NAME="ecommerce in ecommerce Coverage Results" MODIFIED="1686496243293" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/challenge2$controllers_in_ecommerce.ic" NAME="controllers in ecommerce Coverage Results" MODIFIED="1686485905966" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>

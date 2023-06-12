@@ -96,7 +96,7 @@ class CustomerServiceTest {
     @Test
     void updateCustomerSuccess() {
         CustomerRequestDTO customerRequest =
-                new CustomerRequestDTO("John Doe","12345678910","john.doe@gmail.com");
+                new CustomerRequestDTO("JohnDoe","12345678910","john.doe@gmail.com");
 
         Customer customer = CustomerUtil.createCustomerDefault();
 

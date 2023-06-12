@@ -3,6 +3,7 @@ package br.com.compassuol.sp.challenge.ecommerce.service;
 import br.com.compassuol.sp.challenge.ecommerce.dto.request.ProductRequestDTO;
 import br.com.compassuol.sp.challenge.ecommerce.dto.response.ProductResponseDTO;
 import br.com.compassuol.sp.challenge.ecommerce.entity.Product;
+import br.com.compassuol.sp.challenge.ecommerce.exceptions.ProductPriceNotValidException;
 import br.com.compassuol.sp.challenge.ecommerce.exceptions.ResourceNotFoundException;
 import br.com.compassuol.sp.challenge.ecommerce.repository.ProductRepository;
 import org.junit.jupiter.api.Test;
@@ -103,6 +104,14 @@ class ProductServiceTest {
     }
 
     @Test
+    public void createProductPriceNotValidException(){
+
+        ProductRequestDTO productRequest = new ProductRequestDTO("Fabric cotton", "Skirt", 0);
+
+        assertThrows(ProductPriceNotValidException.class, () -> productService.createProduct(productRequest));
+        verify(productRepository,times(0)).save(any(Product.class));
+    }
+    @Test
     public void findAllProductsSuccessTest() {
 
     	Product product1 = new Product("Skirt", 54.99, "Fabric cotton" );
@@ -158,20 +167,24 @@ class ProductServiceTest {
     void testUpdateProduct() {
 
         Product product = createProductDefault();
-        product = productRepository.save(product);
 
-        ProductRequestDTO request = new ProductRequestDTO();
-        request.setName("New Skirt");
-        request.setPrice(59.99);
-        request.setDescription("Fabric silk");
-        if (product != null) {
-            ProductResponseDTO response = productService.updateProduct(product.getProductId(), request);
+        ProductRequestDTO request = new ProductRequestDTO("Fabric silk","New Skirt",59.99);
 
-            assertNotNull(response);
-            assertEquals(request.getName(), response.getName());
-            assertEquals(request.getPrice(), response.getPrice(), 0.001);
-            assertEquals(request.getDescription(), response.getDescription());
-        }
+        ProductResponseDTO expectedResponse = new ProductResponseDTO(1, "New Skirt", 59.99, "Fabric silk");
+
+        when(productRepository.findById(anyInt())).thenReturn(Optional.of(product));
+        when(productRepository.save(any(Product.class))).thenReturn(product);
+
+        ProductResponseDTO response = productService.updateProduct(1,request);
+
+        assertAll("Update Product",
+                () -> assertEquals(1,response.getProductId()),
+                () -> assertEquals(expectedResponse.getDescription(), response.getDescription()),
+                () -> assertEquals(expectedResponse.getPrice(),response.getPrice())
+        );
+
+        verify(productRepository).findById(anyInt());
+        verify(productRepository).save(any(Product.class));
     }
 
     @Test

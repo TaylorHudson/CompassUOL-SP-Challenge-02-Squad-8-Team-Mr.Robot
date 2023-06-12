@@ -61,6 +61,13 @@ public class GlobalErrorHandler {
         return ResponseEntity.status(status).body(error);
     }
 
+    @ExceptionHandler(ProductExitsInAOrderException.class)
+    public ResponseEntity<ErrorMessage> handleProductExistsInAOrder(ProductExitsInAOrderException ex) {
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        ErrorMessage error = createErrorResponse(status, ex);
+        return ResponseEntity.status(status).body(error);
+    }
+
     private ErrorMessage createErrorResponse(HttpStatus status, Exception ex) {
         return ErrorMessage
                 .builder()

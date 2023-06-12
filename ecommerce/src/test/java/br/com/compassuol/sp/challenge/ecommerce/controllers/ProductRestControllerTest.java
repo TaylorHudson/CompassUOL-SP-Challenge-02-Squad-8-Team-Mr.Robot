@@ -95,7 +95,7 @@ public class ProductRestControllerTest {
 
     @Test
     void createProductSuccess() throws Exception {
-        var request = new ProductRequestDTO("New description", "New Product", 9.99, 1 );
+        var request = new ProductRequestDTO("New description", "New Product", 9.99);
         var responseDTO = createUpdatedProductResponse();
 
         when(productService.createProduct(any(ProductRequestDTO.class))).thenReturn(responseDTO);
@@ -115,7 +115,7 @@ public class ProductRestControllerTest {
 
     @Test
     void createProductPriceNotValidException() throws Exception {
-        var request = new ProductRequestDTO("New description", "New Product",0, 1);
+        var request = new ProductRequestDTO("New description", "New Product",0);
 
         when(productService.createProduct(any(ProductRequestDTO.class))).thenThrow(new ProductPriceNotValidException(""));
 

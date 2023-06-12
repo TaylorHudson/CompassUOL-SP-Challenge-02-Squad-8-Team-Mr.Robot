@@ -83,7 +83,7 @@ class ProductServiceTest {
     @Test
     public void createProductSuccessTest(){
 
-        ProductRequestDTO productRequest = new ProductRequestDTO("Fabric cotton", "Skirt", 54.99, 1);
+        ProductRequestDTO productRequest = new ProductRequestDTO("Fabric cotton", "Skirt", 54.99);
         Product product = createProductDefault();
 
 
